@@ -397,12 +397,14 @@ function getModalidades() {
 // COMPROVANTES
 // ═══════════════════════════════════
 function mudarTipo() {
+  try {
   var tipo = document.getElementById('iPagTipo').value;
   comprovantes = [];
   numComps = 0;
   document.getElementById('compWrap').innerHTML = '';
   document.getElementById('btnAddComp').style.display = tipo === 'agendado' ? 'block' : 'none';
   addComp(tipo === 'avista' ? 'Comprovante — Pagamento à vista' : 'Comprovante 1 — Entrada');
+  } catch(e) { alert('Erro tipo: ' + e.message); }
 }
 
 function addComp(label) {
@@ -492,6 +494,7 @@ function validar() {
 // GERAR RECIBO
 // ═══════════════════════════════════
 function gerarRecibo() {
+  try {
   if (!validar()) {
     showToast('⚠️ Preencha todos os campos obrigatórios');
     return;
@@ -560,6 +563,7 @@ function gerarRecibo() {
   document.getElementById('bn0').classList.remove('on');
   document.getElementById('bn1').classList.remove('on');
   window.scrollTo(0, 0);
+  } catch(e) { alert('Erro: ' + e.message); }
 }
 
 // ═══════════════════════════════════
