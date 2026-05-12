@@ -205,12 +205,12 @@ canvas{display:none;position:fixed;left:-9999px;top:0}
 <div class="r2">
   <div class="fi">
     <label class="fl">Qtd. figurinos <span class="rq">*</span></label>
-    <input class="inp" type="number" id="iQtd" value="1" min="1" inputmode="numeric" placeholder="1">
+    <input class="inp" type="number" id="iQtd" value="1" min="1" inputmode="numeric" placeholder="1" oninput="if(window.calcTotal)calcTotal()" onchange="if(window.calcTotal)calcTotal()">
     <div class="em" id="eQtd">Informe a quantidade</div>
   </div>
   <div class="fi">
     <label class="fl">Valor unitário R$ <span class="rq">*</span></label>
-    <input class="inp" type="number" id="iUnit" min="0.01" step="0.01" inputmode="decimal" placeholder="Ex: 495,00">
+    <input class="inp" type="number" id="iUnit" min="0.01" step="0.01" inputmode="decimal" placeholder="Ex: 495,00" oninput="if(window.calcTotal)calcTotal()" onchange="if(window.calcTotal)calcTotal()">
     <div class="em" id="eUnit">Informe o valor</div>
   </div>
 </div>
@@ -222,7 +222,7 @@ canvas{display:none;position:fixed;left:-9999px;top:0}
 <div class="slbl">📎 Comprovantes</div>
 <div class="fi">
   <label class="fl">Tipo de pagamento</label>
-  <select class="inp" id="iPagTipo">
+  <select class="inp" id="iPagTipo" onchange="if(window.initComps)initComps()">
     <option value="avista">À vista — 1 comprovante</option>
     <option value="agendado">Com agendamentos — vários comprovantes</option>
   </select>
@@ -363,6 +363,7 @@ function calcTotal() {
   var q=parseInt($('iQtd').value)||0;
   $('iTotal').value=(u>0&&q>0)?'R$ '+fmt(u*q):'';
 }
+window.calcTotal=calcTotal;
 $('iQtd').addEventListener('input',calcTotal);
 $('iQtd').addEventListener('change',calcTotal);
 $('iUnit').addEventListener('input',calcTotal);
@@ -393,6 +394,7 @@ function initComps() {
   $('btnAddComp').style.display=(tipo==='agendado')?'block':'none';
   addComp(tipo==='avista'?'Comprovante — Pagamento à vista':'Comprovante 1 — Entrada');
 }
+window.initComps=initComps;
 $('iPagTipo').addEventListener('change',initComps);
 $('btnAddComp').addEventListener('click',function(){addComp('');});
 
