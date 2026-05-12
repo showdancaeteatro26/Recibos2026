@@ -215,7 +215,18 @@ canvas { display: none; position: fixed; left: -9999px; top: 0; }
     <option value="agendado">Com agendamentos — vários comprovantes</option>
   </select>
 </div>
-<div id="compWrap"></div>
+<div id="compWrap">
+  <div class="comp-card" id="comp_1">
+    <div class="comp-title">📎 Comprovante — Pagamento à vista</div>
+    <input class="comp-desc-inp" type="text" id="desc_1" value="Comprovante — Pagamento à vista" placeholder="Descrição do comprovante">
+    <button type="button" class="upload-area" id="upbtn_1" onclick="document.getElementById('upfile_1').click()">
+      📎 Toque para selecionar o comprovante<br>
+      <small style="font-size:12px;opacity:0.7;">Foto do PIX ou comprovante bancário</small>
+    </button>
+    <input type="file" id="upfile_1" accept="image/*,application/pdf" style="display:none;" onchange="handleFile(this,1)">
+    <img id="upimg_1" class="file-preview">
+  </div>
+</div>
 <button type="button" class="btn-add-comp" id="btnAddComp" style="display:none;" onclick="addComp()">+ Adicionar outro comprovante</button>
 
 <button type="button" class="btn-main" onclick="gerarRecibo()">🧾 Gerar Recibo</button>
@@ -494,7 +505,6 @@ function validar() {
 // GERAR RECIBO
 // ═══════════════════════════════════
 function gerarRecibo() {
-  try {
   if (!validar()) {
     showToast('⚠️ Preencha todos os campos obrigatórios');
     return;
@@ -563,7 +573,6 @@ function gerarRecibo() {
   document.getElementById('bn0').classList.remove('on');
   document.getElementById('bn1').classList.remove('on');
   window.scrollTo(0, 0);
-  } catch(e) { alert('Erro: ' + e.message); }
 }
 
 // ═══════════════════════════════════
@@ -597,229 +606,122 @@ function copiarFallback(txt) {
 // ═══════════════════════════════════
 function gerarImagem() {
   if (!recAtual) { showToast('Gere um recibo primeiro'); return; }
-
-  // Abre janela ANTES do setTimeout (Safari bloqueia window.open em callbacks assíncronos)
-  var win = window.open('', '_blank');
-  if (!win) { showToast('Permita pop-ups no Safari para gerar a imagem'); return; }
-
-  win.document.write('<html><body style="background:#1c1018;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;"><p>⏳ Gerando imagem...</p></body></html>');
-  win.document.close();
-
+  var r = recAtual;
   document.getElementById('loading').classList.add('on');
 
   setTimeout(function() {
     try {
-      var r = recAtual;
       var cv = document.getElementById('cv');
       var ctx = cv.getContext('2d');
       var W = 900, pad = 50;
-
-      // Medir texto
       cv.width = W; cv.height = 100;
       ctx.font = '27px Georgia, serif';
       var linhas = quebrarTexto(ctx, r.texto, W - pad * 2 - 20);
       var H = 260 + linhas.length * 48 + 220;
       cv.width = W; cv.height = H;
 
-      // Fundo
-      ctx.fillStyle = '#f5eff4';
-      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = '#f5eff4'; ctx.fillRect(0, 0, W, H);
+      retArredondado(ctx, 18, 18, W-36, H-36, 18, '#fff');
+      retArredondado(ctx, 18, 18, W-36, 160, 18, '#1c1018');
+      ctx.fillStyle = '#1c1018'; ctx.fillRect(18, 140, W-36, 40);
 
-      // Card branco
-      retArredondado(ctx, 18, 18, W - 36, H - 36, 18, '#fff');
-
-      // Header escuro
-      retArredondado(ctx, 18, 18, W - 36, 160, 18, '#1c1018');
-      ctx.fillStyle = '#1c1018';
-      ctx.fillRect(18, 140, W - 36, 40);
-
-      // Título
       ctx.textAlign = 'center';
       ctx.fillStyle = '#fff';
       ctx.font = 'bold 36px Georgia, serif';
-      ctx.fillText('RECIBO DE PAGAMENTO', W / 2, 82);
+      ctx.fillText('RECIBO DE PAGAMENTO', W/2, 82);
       ctx.font = 'italic 18px Georgia, serif';
       ctx.fillStyle = 'rgba(255,255,255,0.45)';
-      ctx.fillText('Pagamento referente à compra coletiva de figurinos — 2026', W / 2, 115);
+      ctx.fillText('Pagamento referente à compra coletiva de figurinos — 2026', W/2, 115);
 
-      // Barra dourada
-      var g = ctx.createLinearGradient(60, 152, W - 60, 152);
+      var g = ctx.createLinearGradient(60, 152, W-60, 152);
       g.addColorStop(0, '#c49a2a'); g.addColorStop(0.5, '#f5d97a'); g.addColorStop(1, '#c49a2a');
-      ctx.fillStyle = g;
-      ctx.fillRect(60, 150, W - 120, 3);
+      ctx.fillStyle = g; ctx.fillRect(60, 150, W-120, 3);
 
-      // Label
-      var lw = 195, lh = 32, lx = (W - lw) / 2, ly = 182;
+      var lw = 195, lh = 32, lx = (W-lw)/2, ly = 182;
       ctx.beginPath(); ctx.roundRect(lx, ly, lw, lh, 16);
       ctx.fillStyle = '#fce8f0'; ctx.fill();
       ctx.strokeStyle = '#f0c0d4'; ctx.lineWidth = 1.5; ctx.stroke();
       ctx.fillStyle = '#8a0f3f'; ctx.font = 'bold 15px sans-serif';
-      ctx.fillText('FIGURINOS 2026', W / 2, ly + 21);
+      ctx.fillText('FIGURINOS 2026', W/2, ly+21);
 
-      // Texto do recibo
-      ctx.textAlign = 'left';
-      ctx.fillStyle = '#1c1018';
-      ctx.font = '27px Georgia, serif';
+      ctx.textAlign = 'left'; ctx.fillStyle = '#1c1018'; ctx.font = '27px Georgia, serif';
       var y = 238;
-      for (var i = 0; i < linhas.length; i++) {
-        ctx.fillText(linhas[i], pad, y);
-        y += 48;
-      }
+      for (var i = 0; i < linhas.length; i++) { ctx.fillText(linhas[i], pad, y); y += 48; }
 
-      // Separador
-      y += 16;
-      ctx.strokeStyle = '#ddd'; ctx.lineWidth = 1; ctx.setLineDash([8, 6]);
-      ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(W - pad, y); ctx.stroke();
-      ctx.setLineDash([]);
+      y += 16; ctx.strokeStyle = '#ddd'; ctx.lineWidth = 1; ctx.setLineDash([8, 6]);
+      ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(W-pad, y); ctx.stroke(); ctx.setLineDash([]);
 
-      // Assinatura
-      y += 30;
-      ctx.textAlign = 'right';
+      y += 30; ctx.textAlign = 'right';
       ctx.font = '23px Georgia, serif'; ctx.fillStyle = '#7a6070';
-      ctx.fillText('Barueri, ' + r.dataHoje, W - pad, y);
-      y += 20;
-      ctx.strokeStyle = '#c0185a'; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(W - pad - 215, y); ctx.lineTo(W - pad, y); ctx.stroke();
-      y += 28;
-      ctx.font = 'bold 28px Georgia, serif'; ctx.fillStyle = '#1c1018';
-      ctx.fillText('Maria Claudia S. Donegá', W - pad, y);
-      y += 24;
-      ctx.font = '21px Georgia, serif'; ctx.fillStyle = '#7a6070';
-      ctx.fillText('CPF 026.426.519-08', W - pad, y);
+      ctx.fillText('Barueri, ' + r.dataHoje, W-pad, y);
+      y += 20; ctx.strokeStyle = '#c0185a'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(W-pad-215, y); ctx.lineTo(W-pad, y); ctx.stroke();
+      y += 28; ctx.font = 'bold 28px Georgia, serif'; ctx.fillStyle = '#1c1018';
+      ctx.fillText('Maria Claudia S. Donegá', W-pad, y);
+      y += 24; ctx.font = '21px Georgia, serif'; ctx.fillStyle = '#7a6070';
+      ctx.fillText('CPF 026.426.519-08', W-pad, y);
 
-      // Rodapé
-      ctx.fillStyle = '#1c1018';
-      ctx.fillRect(18, H - 54, W - 36, 36);
-      ctx.fillStyle = 'rgba(255,255,255,0.3)';
-      ctx.font = '16px sans-serif'; ctx.textAlign = 'center';
-      ctx.fillText('Comprovantes Figurinos 2026 · E AGORA… QUEM É O VILÃO? · Barueri, SP', W / 2, H - 30);
+      ctx.fillStyle = '#1c1018'; ctx.fillRect(18, H-54, W-36, 36);
+      ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.font = '16px sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('Figurinos 2026 · E AGORA… QUEM É O VILÃO? · Barueri, SP', W/2, H-30);
 
       document.getElementById('loading').classList.remove('on');
 
       var nome = 'Recibo_' + r.aluna.replace(/\s+/g, '_') + '_2026.png';
       var url = cv.toDataURL('image/png');
 
-      // Escrever na janela já aberta
-      win.document.open();
-      win.document.write(
-        '<!DOCTYPE html><html><head><meta charset="UTF-8">' +
-        '<meta name="viewport" content="width=device-width,initial-scale=1">' +
-        '<title>Recibo ' + r.aluna + '</title>' +
-        '<style>body{margin:0;background:#1c1018;display:flex;flex-direction:column;align-items:center;padding:16px;gap:12px;font-family:sans-serif}' +
-        'img{max-width:100%;border-radius:12px}' +
-        '.tip{background:#fff;border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.6;max-width:500px;width:100%}' +
-        '.tip b{color:#c0185a}' +
-        'a.dl{display:block;width:100%;max-width:500px;padding:14px;border-radius:12px;background:#c0185a;color:#fff;text-align:center;font-weight:bold;font-size:15px;text-decoration:none}</style>' +
+      // Usar <a download> — funciona sem pop-up no Safari
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = nome;
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('📸 Imagem salva! Abra o app Arquivos ou Fotos.');
 
-```
-    '</head><body>' +
-    '<div class="tip">📱 <b>iPhone:</b> Toque e segure na imagem abaixo → toque em <b>"Salvar imagem"</b> → ela vai para o rolo da câmera → envie pelo WhatsApp</div>' +
-    '<img src="' + url + '" alt="Recibo">' +
-    '<a class="dl" href="' + url + '" download="' + nome + '">⬇️ Baixar imagem</a>' +
-    '</body></html>'
-  );
-  win.document.close();
-
-} catch(e) {
-  document.getElementById('loading').classList.remove('on');
-  if (win && !win.closed) win.close();
-  console.error('Erro imagem:', e);
-  showToast('Erro ao gerar imagem. Use "Copiar texto".');
-}
-```
-
-}, 200);
+    } catch(e) {
+      document.getElementById('loading').classList.remove('on');
+      showToast('Erro ao gerar imagem: ' + e.message);
+    }
+  }, 200);
 }
 
-function quebrarTexto(ctx, texto, maxW) {
-var palavras = texto.split(’ ’);
-var linhas = [], atual = ‘’;
-for (var i = 0; i < palavras.length; i++) {
-var teste = atual ? atual + ’ ’ + palavras[i] : palavras[i];
-if (ctx.measureText(teste).width > maxW && atual) {
-linhas.push(atual);
-atual = palavras[i];
-} else {
-atual = teste;
-}
-}
-if (atual) linhas.push(atual);
-return linhas;
-}
 
-function retArredondado(ctx, x, y, w, h, r, fill) {
-ctx.beginPath();
-ctx.roundRect(x, y, w, h, r);
-if (fill) { ctx.fillStyle = fill; ctx.fill(); }
-}
-
-// ═══════════════════════════════════
-// GERAR PDF
-// ═══════════════════════════════════
 function gerarPDF() {
-if (!recAtual) { showToast(‘Gere um recibo primeiro’); return; }
-var r = recAtual;
+  if (!recAtual) { showToast('Gere um recibo primeiro'); return; }
+  var r = recAtual;
 
-var win = window.open(’’, ‘_blank’);
-if (!win) { showToast(‘Permita pop-ups no Safari para gerar o PDF’); return; }
+  var compsHtml = '';
+  for (var i = 0; i < r.comps.length; i++) {
+    var c = r.comps[i];
+    compsHtml += '<div style="margin-top:20px;border-top:1px dashed #ddd;padding-top:16px;">' +
+      '<p style="font-size:11px;font-weight:700;color:#7a6070;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">📎 ' + (c.desc || 'Comprovante ' + (i+1)) + '</p>' +
+      (c.img && c.img !== 'pdf' ? '<img src="' + c.img + '" style="max-width:100%;border-radius:8px;border:1px solid #ddd;">' :
+       c.img === 'pdf' ? '<p style="color:#7a6070;font-size:13px;">PDF anexado</p>' : '') +
+      '</div>';
+  }
 
-var compsHtml = ‘’;
-for (var i = 0; i < r.comps.length; i++) {
-var c = r.comps[i];
-compsHtml +=
-‘<div style="margin-top:20px;border-top:1px dashed #ddd;padding-top:16px;">’ +
-’<p style="font-size:11px;font-weight:700;color:#7a6070;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">📎 ’ + (c.desc || ’Comprovante ’ + (i + 1)) + ‘</p>’ +
-(c.img && c.img !== ‘pdf’
-? ‘<img src="' + c.img + '" style="max-width:100%;border-radius:8px;border:1px solid #ddd;">’
-: c.img === ‘pdf’ ? ‘<p style="color:#7a6070;font-size:13px;">Arquivo PDF anexado</p>’
-: ‘’) +
-‘</div>’;
+  var html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recibo - ' + r.aluna + '</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Georgia,serif;background:#f5eff4;padding:20px 14px}.doc{background:#fff;max-width:540px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.1)}.hdr{background:linear-gradient(135deg,#1c1018,#3a0e28);padding:20px 22px;text-align:center}.hdr h1{color:#fff;font-size:19px;letter-spacing:2px;text-transform:uppercase}.bar{height:2px;background:linear-gradient(90deg,#c49a2a,#f5d97a,#c49a2a);margin-top:10px}.hdr p{color:rgba(255,255,255,.4);font-size:11px;margin-top:6px;font-style:italic}.body{padding:22px}.lbl{text-align:center;margin-bottom:13px}.lbl span{display:inline-block;background:#fce8f0;color:#8a0f3f;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 12px;border-radius:20px;border:1px solid #f0c0d4}.txt{font-size:15px;line-height:2;color:#1c1018;text-align:justify;margin-bottom:17px}.sig{border-top:1px dashed #ddd;padding-top:13px;display:flex;flex-direction:column;align-items:flex-end;gap:3px}.sig .dt{font-size:12px;color:#7a6070;margin-bottom:5px}.sig .ln{width:155px;height:1px;background:#c0185a;margin-bottom:5px}.sig .nm{font-size:15px;font-weight:700}.sig .cp{font-size:11px;color:#7a6070}.foot{background:#1c1018;padding:10px;text-align:center}.foot p{color:rgba(255,255,255,.3);font-size:10px}.btn-print{width:100%;padding:14px;border-radius:12px;border:none;background:#c0185a;color:#fff;font-family:sans-serif;font-weight:bold;font-size:15px;cursor:pointer;margin-top:13px;display:block}.hint{font-size:12px;color:#7a6070;text-align:center;margin-top:8px;line-height:1.5;padding:0 8px}@media print{body{background:#fff;padding:0}.doc{box-shadow:none;border-radius:0;max-width:100%}.nop{display:none}}</style></head><body><div class="doc"><div class="hdr"><h1>Recibo de Pagamento</h1><div class="bar"></div><p>Pagamento referente à compra coletiva de figurinos do espetáculo de 2026</p></div><div class="body"><div class="lbl"><span>Figurinos 2026</span></div><div class="txt">' + r.texto + '</div><div class="sig"><div class="dt">Barueri, ' + r.dataHoje + '</div><div class="ln"></div><div class="nm">Maria Claudia S. Donegá</div><div class="cp">CPF 026.426.519-08</div></div>' + compsHtml + '</div><div class="foot"><p>Figurinos 2026 — E AGORA… QUEM É O VILÃO? · ' + r.ts + '</p></div></div><div class="nop" style="max-width:540px;margin:13px auto;"><button class="btn-print" onclick="window.print()">🖨️ Imprimir / Salvar como PDF</button><p class="hint">iPhone: toque em 🖨️ → Imprimir → belisque a prévia para ampliar → toque em ↑ → "Salvar em PDF"</p></div></body></html>';
+
+// Criar blob e fazer download direto
+try {
+var blob = new Blob([html], {type: ‘text/html;charset=utf-8’});
+var url = URL.createObjectURL(blob);
+var a = document.createElement(‘a’);
+a.href = url;
+a.download = ‘Recibo_’ + r.aluna.replace(/\s+/g,’_’) + ‘_2026.html’;
+a.style.display = ‘none’;
+document.body.appendChild(a);
+a.click();
+setTimeout(function(){ URL.revokeObjectURL(url); document.body.removeChild(a); }, 1000);
+showToast(‘📄 Arquivo salvo! Abra nos Arquivos do iPhone.’);
+} catch(e) {
+// Fallback: abrir inline
+document.open(‘text/html’, ‘replace’);
+document.write(html);
+document.close();
 }
-
-var html =
-‘<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">’ +
-’<title>Recibo — ’ + r.aluna + ‘</title>’ +
-‘<style>’ +
-‘* { box-sizing: border-box; margin: 0; padding: 0; }’ +
-‘body { font-family: Georgia, serif; background: #f5eff4; padding: 30px 16px; }’ +
-‘.doc { background: #fff; max-width: 560px; margin: 0 auto; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 30px rgba(0,0,0,.12); }’ +
-‘.hdr { background: linear-gradient(135deg,#1c1018,#3a0e28); padding: 26px 28px; text-align: center; }’ +
-‘.hdr h1 { color: #fff; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; }’ +
-‘.bar { height: 2px; background: linear-gradient(90deg,#c49a2a,#f5d97a,#c49a2a); margin-top: 12px; }’ +
-‘.hdr p { color: rgba(255,255,255,.45); font-size: 12px; margin-top: 8px; font-style: italic; }’ +
-‘.body { padding: 28px; }’ +
-‘.lbl { text-align: center; margin-bottom: 16px; }’ +
-‘.lbl span { display: inline-block; background: #fce8f0; color: #8a0f3f; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; border: 1px solid #f0c0d4; }’ +
-‘.txt { font-size: 15px; line-height: 2; color: #1c1018; text-align: justify; margin-bottom: 20px; }’ +
-‘.sig { border-top: 1px dashed #ddd; padding-top: 16px; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }’ +
-‘.sig .dt { font-size: 13px; color: #7a6070; margin-bottom: 6px; }’ +
-‘.sig .ln { width: 180px; height: 1px; background: #c0185a; margin-bottom: 6px; }’ +
-‘.sig .nm { font-size: 16px; font-weight: 700; }’ +
-‘.sig .cp { font-size: 12px; color: #7a6070; }’ +
-‘.foot { background: #1c1018; padding: 12px; text-align: center; }’ +
-‘.foot p { color: rgba(255,255,255,.3); font-size: 11px; }’ +
-‘.btn-pdf { width: 100%; padding: 14px; border-radius: 12px; border: none; background: #c0185a; color: #fff; font-family: sans-serif; font-weight: bold; font-size: 15px; cursor: pointer; margin-top: 16px; }’ +
-‘.hint { font-size: 12px; color: #7a6070; text-align: center; margin-top: 8px; line-height: 1.5; }’ +
-‘@media print { body { background: #fff; padding: 0; } .doc { box-shadow: none; border-radius: 0; max-width: 100%; } .no-print { display: none; } }’ +
-‘</style></head><body>’ +
-‘<div class="doc">’ +
-‘<div class="hdr"><h1>Recibo de Pagamento</h1><div class="bar"></div><p>Pagamento referente à compra coletiva de figurinos do espetáculo de 2026</p></div>’ +
-‘<div class="body">’ +
-‘<div class="lbl"><span>Figurinos 2026</span></div>’ +
-‘<div class="txt">’ + r.texto + ‘</div>’ +
-’<div class="sig"><div class="dt">Barueri, ’ + r.dataHoje + ‘</div><div class="ln"></div><div class="nm">Maria Claudia S. Donegá</div><div class="cp">CPF 026.426.519-08</div></div>’ +
-compsHtml +
-‘</div>’ +
-’<div class="foot"><p>Comprovantes Figurinos 2026 — E AGORA… QUEM É O VILÃO? · ’ + r.ts + ‘</p></div>’ +
-‘</div>’ +
-‘<div class="no-print" style="max-width:560px;margin:16px auto;">’ +
-‘<button class="btn-pdf" onclick="window.print()">🖨️ Salvar como PDF</button>’ +
-‘<p class="hint">iPhone: toque em 🖨️ → Imprimir → belisque a prévia → ↑ compartilhar → Salvar em PDF</p>’ +
-‘</div>’ +
-‘</body></html>’;
-
-win.document.write(html);
-win.document.close();
 }
 
 // ═══════════════════════════════════
@@ -955,10 +857,10 @@ showToast(‘🗑️ Recibo removido’);
 // ═══════════════════════════════════
 // INICIALIZAÇÃO
 // ═══════════════════════════════════
-mudarTipo();
+// Inicializar comprovantes array com o comp já no HTML
+comprovantes = [{desc: ‘Comprovante — Pagamento à vista’, img: null}];
+numComps = 1;
 </script>
 
 </body>
 </html>
-
-
