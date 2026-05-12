@@ -40,7 +40,7 @@ body{font-family:'Outfit',sans-serif;background:#f0e8ec;color:var(--ink);display
 .hbar{height:2px;background:linear-gradient(90deg,var(–gd),var(–gdl),var(–gd));margin-top:12px}
 
 /* PANEL */
-.panel{background:#fff;border-radius:20px 20px 0 0;margin-top:-16px;padding:20px 16px 32px;min-height:60vh}
+.panel{background:#fff;border-radius:20px 20px 0 0;margin-top:-16px;padding:20px 16px 120px;min-height:60vh}
 
 /* FORM */
 .slbl{font-size:.68rem;font-weight:700;color:var(–pk);text-transform:uppercase;letter-spacing:.1em;margin:18px 0 8px;padding-bottom:6px;border-bottom:2px solid var(–pks)}
@@ -205,18 +205,19 @@ canvas{display:none;position:fixed;left:-9999px;top:0}
 <div class="r2">
   <div class="fi">
     <label class="fl">Qtd. figurinos <span class="rq">*</span></label>
-    <input class="inp" type="number" id="iQtd" value="1" min="1" inputmode="numeric" placeholder="1" oninput="if(window.calcTotal)calcTotal()" onchange="if(window.calcTotal)calcTotal()">
+    <input class="inp" type="number" id="iQtd" value="1" min="1" inputmode="numeric" placeholder="1">
     <div class="em" id="eQtd">Informe a quantidade</div>
   </div>
   <div class="fi">
     <label class="fl">Valor unitário R$ <span class="rq">*</span></label>
-    <input class="inp" type="number" id="iUnit" min="0.01" step="0.01" inputmode="decimal" placeholder="Ex: 495,00" oninput="if(window.calcTotal)calcTotal()" onchange="if(window.calcTotal)calcTotal()">
+    <input class="inp" type="number" id="iUnit" min="0.01" step="0.01" inputmode="decimal" placeholder="Ex: 495,00">
     <div class="em" id="eUnit">Informe o valor</div>
   </div>
 </div>
 <div class="fi">
-  <label class="fl">Valor total (automático)</label>
-  <input class="inp-ro" id="iTotal" readonly placeholder="—">
+  <label class="fl">Valor total R$ <span class="rq">*</span></label>
+  <input class="inp" type="number" id="iTotal" min="0.01" step="0.01" inputmode="decimal" placeholder="Ex: 495,00">
+  <div class="em" id="eTotal">Informe o valor total</div>
 </div>
 
 <div class="slbl">📎 Comprovantes</div>
@@ -357,17 +358,7 @@ $('iDoc').addEventListener('input',function(){
   this.value=v;
 });
 
-/* ── CALC TOTAL ── */
-function calcTotal() {
-  var u=parseFloat($('iUnit').value)||0;
-  var q=parseInt($('iQtd').value)||0;
-  $('iTotal').value=(u>0&&q>0)?'R$ '+fmt(u*q):'';
-}
-window.calcTotal=calcTotal;
-$('iQtd').addEventListener('input',calcTotal);
-$('iQtd').addEventListener('change',calcTotal);
-$('iUnit').addEventListener('input',calcTotal);
-$('iUnit').addEventListener('change',calcTotal);
+/* ── CALC TOTAL ── removed, user enters total directly */
 
 /* ── MODALIDADES ── */
 $('cbOutra').addEventListener('change',function(){
@@ -472,8 +463,9 @@ function validate() {
   showErr('iAluna','eAluna',!aluna); if(!aluna)ok=false;
   var em=$('eMod');
   if(!mods.length){em.classList.add('on');ok=false;}else em.classList.remove('on');
+  var total=parseFloat($('iTotal').value)||0;
   showErr('iQtd','eQtd',qtd<1); if(qtd<1)ok=false;
-  showErr('iUnit','eUnit',unit<=0); if(unit<=0)ok=false;
+  showErr('iTotal','eTotal',total<=0); if(total<=0)ok=false;
   return ok;
 }
 
@@ -492,8 +484,9 @@ $('btnGerar').addEventListener('click',function(){
   var aluna=($('iAluna').value||'').trim();
   var mods=getMods();
   var qtd=parseInt($('iQtd').value);
-  var unit=parseFloat($('iUnit').value);
-  var total=unit*qtd;
+  var unit=parseFloat($('iUnit').value)||0;
+  var total=parseFloat($('iTotal').value)||0;
+  if(!unit && qtd>0 && total>0) unit=total/qtd;
   var docLbl=doc.replace(/\D/g,'').length>11?'CNPJ':'CPF';
   var multi=mods.length>1;
   var fPl=qtd>1?'figurinos':'figurino';
@@ -712,7 +705,7 @@ goTo(2);
 $(‘btnNovo’).addEventListener(‘click’,novoRecibo);
 function novoRecibo(){
 recAtual=null;
-[‘iResp’,‘iDoc’,‘iAluna’,‘iOutra’,‘iUnit’].forEach(function(id){var el=$(id);if(el)el.value=’’;});
+[‘iResp’,‘iDoc’,‘iAluna’,‘iOutra’,‘iUnit’,‘iTotal’].forEach(function(id){var el=$(id);if(el)el.value=’’;});
 $(‘iQtd’).value=‘1’;
 $(‘iTotal’).value=’’;
 $(‘outraBox’).style.display=‘none’;
