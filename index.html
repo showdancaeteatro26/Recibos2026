@@ -3,863 +3,608 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Figurinos 2026">
 <meta name="theme-color" content="#1c1018">
 <title>Figurinos 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-body { font-family: 'Outfit', sans-serif; background: #f0e8ec; color: #1c1018; }
-
-/* NAV */
-.bnav { position: fixed; bottom: 0; left: 0; right: 0; height: 64px; background: #fff; border-top: 2px solid #e0d0d8; display: flex; z-index: 100; }
-.bni { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border: none; background: transparent; font-family: ‘Outfit’, sans-serif; font-size: 11px; font-weight: 500; color: #7a6070; cursor: pointer; }
-.bni.on { color: #c0185a; }
-.bni .ico { font-size: 22px; line-height: 1; }
-
-/* PAGES */
-.page { display: none; padding-bottom: 80px; min-height: 100vh; }
-.page.on { display: block; }
-
-/* HERO */
-.hero { background: linear-gradient(150deg, #1c1018, #3a0e28); padding: 24px 20px 38px; text-align: center; }
-.hero h1 { font-family: ‘Cormorant Garamond’, serif; color: #fff; font-size: 24px; }
-.hero h1 span { color: #f5d97a; }
-.hero p { color: rgba(255,255,255,0.5); font-size: 12px; margin-top: 5px; }
-.hbar { height: 2px; background: linear-gradient(90deg, #c49a2a, #f5d97a, #c49a2a); margin-top: 12px; }
-
-/* CARD */
-.card { background: #fff; border-radius: 20px 20px 0 0; margin-top: -16px; padding: 20px 16px 40px; }
-
-/* SECTION LABEL */
-.slbl { font-size: 11px; font-weight: 700; color: #c0185a; text-transform: uppercase; letter-spacing: 1.5px; margin: 20px 0 8px; padding-bottom: 6px; border-bottom: 2px solid #fce8f0; }
-
-/* FORM FIELDS */
-.fi { margin-bottom: 14px; }
-.fl { display: block; font-size: 11px; font-weight: 600; color: #7a6070; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-.rq { color: #c0185a; }
-input[type=text], input[type=number], select, textarea {
-width: 100%; padding: 13px 14px;
-border: 2px solid #e0d0d8; border-radius: 11px;
-font-family: ‘Outfit’, sans-serif; font-size: 15px;
-color: #1c1018; background: #fff;
-outline: none; -webkit-appearance: none; appearance: none;
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--pk:#c0185a;--pk2:#e8437c;--pks:#fce8f0;--gd:#c49a2a;--gdl:#f5d97a;--ink:#1c1018;--mu:#7a6070;--bd:#e0d0d8;--gn:#1a7a4a;--gns:#e6f5ee;--rd:#c00;--nav:64px}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Outfit',sans-serif;background:#f0e8ec;color:var(--ink);display:flex;flex-direction:column}
+#app{flex:1;overflow:hidden;position:relative}
+.pg{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;display:none;padding-bottom:80px;-webkit-overflow-scrolling:touch}
+.pg.on{display:block}
+.bnav{position:fixed;bottom:0;left:0;right:0;height:var(--nav);background:#fff;border-top:2px solid var(--bd);display:flex;z-index:100;box-shadow:0 -4px 16px rgba(28,16,24,.08)}
+.bni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:transparent;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;color:var(--mu);cursor:pointer}
+.bni.on{color:var(--pk)}
+.bni .ico{font-size:22px;line-height:1}
+.hero{background:linear-gradient(150deg,#1c1018,#3a0e28);padding:24px 20px 38px;text-align:center}
+.hero h1{font-family:'Cormorant Garamond',serif;color:#fff;font-size:24px}
+.hero h1 em{color:var(--gdl);font-style:normal}
+.hero p{color:rgba(255,255,255,.5);font-size:12px;margin-top:5px}
+.hbar{height:2px;background:linear-gradient(90deg,var(--gd),var(--gdl),var(--gd));margin-top:12px}
+.panel{background:#fff;border-radius:20px 20px 0 0;margin-top:-16px;padding:20px 16px 40px}
+.slbl{font-size:11px;font-weight:700;color:var(--pk);text-transform:uppercase;letter-spacing:1.5px;margin:18px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--pks)}
+.fi{margin-bottom:14px}
+.fl{display:block;font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+.rq{color:var(--pk)}
+.inp{width:100%;padding:13px 14px;border:2px solid var(--bd);border-radius:11px;font-family:'Outfit',sans-serif;font-size:15px;color:var(--ink);background:#fff;outline:none;-webkit-appearance:none}
+.inp:focus{border-color:var(--pk)}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.em{color:var(--rd);font-size:11px;margin-top:4px;display:none}
+.em.on{display:block}
+.cklist{border:2px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:8px}
+.ck-row{border-bottom:1px solid #ece4e8}
+.ck-row:last-child{border-bottom:none}
+.ck-row label{display:flex;align-items:center;gap:12px;padding:13px 15px;font-size:15px;cursor:pointer;width:100%;-webkit-user-select:none;user-select:none}
+.ck-row input[type=checkbox]{width:22px;height:22px;min-width:22px;accent-color:var(--pk);cursor:pointer;flex-shrink:0}
+.comp-card{background:#f9f5f8;border:1.5px solid var(--bd);border-radius:12px;padding:13px;margin-bottom:10px}
+.comp-title{font-size:11px;font-weight:700;color:var(--pk);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
+.comp-desc-inp{width:100%;padding:9px 12px;border:1.5px solid var(--bd);border-radius:9px;font-family:'Outfit',sans-serif;font-size:14px;color:var(--ink);outline:none;margin-bottom:8px;-webkit-appearance:none}
+.upload-btn{width:100%;padding:16px;border:2px dashed var(--bd);border-radius:10px;background:#fafafa;cursor:pointer;font-family:'Outfit',sans-serif;font-size:13px;color:var(--mu);text-align:center;display:block;line-height:1.5}
+.upload-btn.ok{border-color:var(--gn);background:var(--gns);color:var(--gn);border-style:solid}
+.preview-img{max-width:100%;max-height:80px;border-radius:8px;margin-top:8px;display:none}
+.btn-add-comp{width:100%;padding:12px;border-radius:11px;border:2px dashed var(--pk);background:var(--pks);color:var(--pk);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;cursor:pointer;margin-top:6px}
+.btn-main{width:100%;padding:16px;border-radius:13px;border:none;background:linear-gradient(135deg,var(--pk),var(--pk2));color:#fff;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;cursor:pointer;margin-top:20px;box-shadow:0 4px 18px rgba(192,24,90,.32)}
+.btn-blue{width:100%;padding:15px;border-radius:12px;border:none;background:linear-gradient(135deg,#1a6fc4,#3a9ae8);color:#fff;font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;cursor:pointer;margin-top:10px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.btn-blue small{font-size:11px;font-weight:400;opacity:.8}
+.btn-green{width:100%;padding:14px;border-radius:12px;border:none;background:var(--gn);color:#fff;font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;cursor:pointer;margin-top:10px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.btn-green small{font-size:11px;font-weight:400;opacity:.8}
+.btn-ok{width:100%;padding:13px;border-radius:12px;border:2px solid #90d4b0;background:var(--gns);color:var(--gn);font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;cursor:pointer;margin-top:10px}
+.btn-gray{width:100%;padding:13px;border-radius:12px;border:2px solid var(--bd);background:#fff;color:var(--mu);font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;cursor:pointer;margin-top:10px}
+.btn-del{width:100%;padding:10px;border-radius:10px;border:1.5px solid #fcc;background:#fff;color:var(--rd);font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-top:8px}
+.rdoc{background:#fffaf5;border:2px solid #f0c0d4;border-radius:14px;overflow:hidden;margin-bottom:12px}
+.rdoc-hdr{background:linear-gradient(135deg,#1c1018,#3a0e28);padding:16px 20px;text-align:center}
+.rdoc-hdr h4{font-family:'Cormorant Garamond',serif;color:#fff;font-size:18px;letter-spacing:1px;text-transform:uppercase}
+.rdoc-hdr p{color:rgba(255,255,255,.45);font-size:11px;margin-top:3px;font-style:italic}
+.rdoc-hdr .rbar{height:2px;background:linear-gradient(90deg,var(--gd),var(--gdl),var(--gd));margin-top:10px}
+.rdoc-body{padding:18px}
+.rdoc-lbl{text-align:center;margin-bottom:13px}
+.rdoc-lbl span{display:inline-block;background:var(--pks);color:#8a0f3f;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 13px;border-radius:20px;border:1px solid #f0c0d4}
+.rdoc-txt{font-size:15px;line-height:2;color:var(--ink);text-align:justify;margin-bottom:14px}
+.rdoc-sig{border-top:1px dashed #ddd;padding-top:12px;display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.rsig-city{font-size:12px;color:var(--mu);margin-bottom:5px}
+.rsig-line{width:160px;height:1px;background:var(--pk);margin-bottom:5px}
+.rsig-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700}
+.rsig-cpf{font-size:11px;color:var(--mu)}
+.pcard{background:#fff;border:1.5px solid var(--bd);border-radius:13px;margin-bottom:10px;overflow:hidden}
+.pchd{padding:13px 15px;display:flex;align-items:center;gap:11px;cursor:pointer}
+.pav{width:42px;height:42px;border-radius:10px;background:var(--pks);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;overflow:hidden}
+.pav img{width:100%;height:100%;object-fit:cover}
+.pin{flex:1;min-width:0}
+.pin strong{font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pin .meta{font-size:11px;color:var(--mu);margin-top:2px}
+.ptags{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+.tag{background:var(--pks);color:var(--pk);border-radius:6px;padding:2px 7px;font-size:10px;font-weight:600}
+.tag-ok{background:var(--gns);color:var(--gn)}
+.pval{text-align:right;flex-shrink:0}
+.pval strong{font-size:14px;display:block}
+.pval span{font-size:11px;color:var(--mu)}
+.pbody{display:none;border-top:1px solid var(--bd);padding:14px 15px}
+.pbody.on{display:block}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.stat{background:#fff;border:1.5px solid var(--bd);border-radius:12px;padding:12px 8px;text-align:center}
+.stat span{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:1px;display:block}
+.stat strong{font-size:18px;color:var(--ink);display:block;margin-top:2px}
+.stat strong.gd{color:var(--gd);font-family:'Cormorant Garamond',serif;font-size:20px}
+.empty{text-align:center;padding:36px 16px;color:var(--mu)}
+.empty .ei{font-size:32px;display:block;margin-bottom:8px;opacity:.4}
+.lov{position:fixed;inset:0;background:rgba(28,16,24,.75);z-index:300;display:none;align-items:center;justify-content:center;flex-direction:column;gap:14px}
+.lov.on{display:flex}
+.spin{width:42px;height:42px;border-radius:50%;border:4px solid rgba(255,255,255,.2);border-top-color:#fff;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.lov p{color:#fff;font-size:14px;font-weight:600}
+.toast{position:fixed;bottom:74px;left:50%;transform:translateX(-50%) translateY(60px);background:#1c1018;color:#fff;padding:11px 20px;border-radius:30px;font-size:13px;font-weight:600;z-index:400;transition:transform .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;max-width:92vw;text-align:center}
+.toast.on{transform:translateX(-50%) translateY(0)}
+/* PDF OVERLAY */
+.pdf-ov{position:fixed;inset:0;background:#fff;z-index:200;display:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.pdf-ov.on{display:block}
+.pdf-ov-inner{max-width:560px;margin:0 auto;padding:16px}
+.pdf-top-bar{display:flex;gap:10px;margin-bottom:14px}
+.pdf-back{flex:1;padding:12px;border-radius:10px;border:2px solid var(--bd);background:#fff;font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;cursor:pointer;color:var(--mu)}
+.pdf-save{flex:2;padding:12px;border-radius:10px;border:none;background:var(--pk);color:#fff;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;cursor:pointer}
+.pdf-hint{background:#1c1018;color:#fff;padding:14px 16px;border-radius:12px;font-size:13px;line-height:1.7;margin-top:14px}
+.pdf-hint strong{color:var(--gdl)}
+canvas{display:none;position:fixed;left:-9999px;top:0}
+@media print{
+  body > *{display:none !important}
+  #pdfOv{display:block !important;position:static !important;overflow:visible !important}
+  .pdf-top-bar{display:none !important}
+  .pdf-hint{display:none !important}
 }
-input:focus, select:focus { border-color: #c0185a; }
-.err-msg { color: #c00; font-size: 11px; margin-top: 4px; display: none; }
-.r2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-/* CHECKBOXES */
-.cklist { border: 2px solid #e0d0d8; border-radius: 12px; overflow: hidden; margin-bottom: 8px; }
-.ck-row { border-bottom: 1px solid #ece4e8; }
-.ck-row:last-child { border-bottom: none; }
-.ck-row label { display: flex; align-items: center; gap: 12px; padding: 13px 15px; font-size: 15px; cursor: pointer; width: 100%; }
-.ck-row input[type=checkbox] { width: 22px; height: 22px; min-width: 22px; accent-color: #c0185a; cursor: pointer; flex-shrink: 0; }
-
-/* FILE UPLOAD */
-.upload-area { width: 100%; padding: 20px; border: 2px dashed #e0d0d8; border-radius: 12px; background: #fafafa; text-align: center; cursor: pointer; font-size: 14px; color: #7a6070; display: block; }
-.upload-area.ok { border-color: #1a7a4a; background: #e6f5ee; border-style: solid; color: #1a7a4a; }
-.file-preview { max-width: 100%; max-height: 80px; border-radius: 8px; margin-top: 8px; display: none; }
-
-/* BUTTONS */
-.btn-main { width: 100%; padding: 16px; border-radius: 13px; border: none; background: linear-gradient(135deg, #c0185a, #e8437c); color: #fff; font-family: ‘Outfit’, sans-serif; font-weight: 700; font-size: 16px; cursor: pointer; margin-top: 20px; }
-.btn-blue { width: 100%; padding: 15px; border-radius: 12px; border: none; background: linear-gradient(135deg, #1a6fc4, #3a9ae8); color: #fff; font-family: ‘Outfit’, sans-serif; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; }
-.btn-green { width: 100%; padding: 14px; border-radius: 12px; border: none; background: #1a7a4a; color: #fff; font-family: ‘Outfit’, sans-serif; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; }
-.btn-purple { width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(135deg, #8a0f3f, #c0185a); color: #fff; font-family: ‘Outfit’, sans-serif; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; }
-.btn-ok { width: 100%; padding: 13px; border-radius: 12px; border: 2px solid #90d4b0; background: #e6f5ee; color: #1a7a4a; font-family: ‘Outfit’, sans-serif; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 10px; }
-.btn-gray { width: 100%; padding: 13px; border-radius: 12px; border: 2px solid #e0d0d8; background: #fff; color: #7a6070; font-family: ‘Outfit’, sans-serif; font-weight: 600; font-size: 15px; cursor: pointer; margin-top: 10px; }
-.btn-add-comp { width: 100%; padding: 12px; border-radius: 11px; border: 2px dashed #c0185a; background: #fce8f0; color: #c0185a; font-family: ‘Outfit’, sans-serif; font-weight: 700; font-size: 14px; cursor: pointer; margin-top: 8px; }
-.btn-del { width: 100%; padding: 10px; border-radius: 10px; border: 1.5px solid #fcc; background: #fff; color: #c00; font-family: ‘Outfit’, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 8px; }
-
-/* RECIBO */
-.rdoc { background: #fffaf5; border: 2px solid #f0c0d4; border-radius: 14px; overflow: hidden; margin-bottom: 12px; }
-.rdoc-hdr { background: linear-gradient(135deg, #1c1018, #3a0e28); padding: 16px 20px; text-align: center; }
-.rdoc-hdr h4 { font-family: ‘Cormorant Garamond’, serif; color: #fff; font-size: 18px; letter-spacing: 1px; text-transform: uppercase; }
-.rdoc-hdr p { color: rgba(255,255,255,0.45); font-size: 11px; margin-top: 3px; font-style: italic; }
-.rdoc-hdr .rbar { height: 2px; background: linear-gradient(90deg, #c49a2a, #f5d97a, #c49a2a); margin-top: 10px; }
-.rdoc-body { padding: 18px; }
-.rdoc-lbl { text-align: center; margin-bottom: 13px; }
-.rdoc-lbl span { display: inline-block; background: #fce8f0; color: #8a0f3f; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 3px 13px; border-radius: 20px; border: 1px solid #f0c0d4; }
-.rdoc-txt { font-size: 15px; line-height: 2; color: #1c1018; text-align: justify; margin-bottom: 14px; }
-.rdoc-sig { border-top: 1px dashed #ddd; padding-top: 12px; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
-.rsig-city { font-size: 12px; color: #7a6070; margin-bottom: 5px; }
-.rsig-line { width: 160px; height: 1px; background: #c0185a; margin-bottom: 5px; }
-.rsig-name { font-family: ‘Cormorant Garamond’, serif; font-size: 15px; font-weight: 700; }
-.rsig-cpf { font-size: 11px; color: #7a6070; }
-
-/* PASTA CARDS */
-.pcard { background: #fff; border: 1.5px solid #e0d0d8; border-radius: 13px; margin-bottom: 10px; overflow: hidden; }
-.pcard-hd { padding: 13px 15px; display: flex; align-items: center; gap: 11px; cursor: pointer; }
-.pcard-av { width: 42px; height: 42px; border-radius: 10px; background: #fce8f0; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; overflow: hidden; }
-.pcard-av img { width: 100%; height: 100%; object-fit: cover; }
-.pcard-info { flex: 1; min-width: 0; }
-.pcard-info strong { font-size: 14px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.pcard-info .meta { font-size: 11px; color: #7a6070; margin-top: 2px; }
-.pcard-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
-.tag { background: #fce8f0; color: #c0185a; border-radius: 6px; padding: 2px 7px; font-size: 10px; font-weight: 600; }
-.tag-ok { background: #e6f5ee; color: #1a7a4a; }
-.pcard-val { text-align: right; flex-shrink: 0; }
-.pcard-val strong { font-size: 14px; display: block; }
-.pcard-val span { font-size: 11px; color: #7a6070; }
-.pcard-body { display: none; border-top: 1px solid #e0d0d8; padding: 14px 15px; }
-.pcard-body.on { display: block; }
-
-/* STATS */
-.stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 14px; }
-.stat { background: #fff; border: 1.5px solid #e0d0d8; border-radius: 12px; padding: 12px 8px; text-align: center; }
-.stat span { font-size: 10px; color: #7a6070; text-transform: uppercase; letter-spacing: 1px; display: block; }
-.stat strong { font-size: 18px; color: #1c1018; display: block; margin-top: 2px; }
-.stat strong.gold { color: #c49a2a; font-family: ‘Cormorant Garamond’, serif; font-size: 20px; }
-
-/* COMP CARD */
-.comp-card { background: #f9f5f8; border: 1.5px solid #e0d0d8; border-radius: 12px; padding: 13px; margin-top: 10px; }
-.comp-title { font-size: 11px; font-weight: 700; color: #c0185a; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-.comp-desc-inp { width: 100%; padding: 9px 12px; border: 1.5px solid #e0d0d8; border-radius: 9px; font-family: ‘Outfit’, sans-serif; font-size: 14px; color: #1c1018; outline: none; margin-bottom: 8px; -webkit-appearance: none; }
-
-/* LOADING */
-.loading { position: fixed; inset: 0; background: rgba(28,16,24,0.75); z-index: 300; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 14px; }
-.loading.on { display: flex; }
-.spin { width: 42px; height: 42px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.2); border-top-color: #fff; animation: spin 0.8s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.loading p { color: #fff; font-size: 14px; font-weight: 600; }
-
-/* TOAST */
-.toast { position: fixed; bottom: 74px; left: 50%; transform: translateX(-50%) translateY(60px); background: #1c1018; color: #fff; padding: 11px 20px; border-radius: 30px; font-size: 13px; font-weight: 600; z-index: 400; transition: transform 0.3s; white-space: nowrap; max-width: 92vw; text-align: center; }
-.toast.on { transform: translateX(-50%) translateY(0); }
-
-/* EMPTY */
-.empty { text-align: center; padding: 36px 16px; color: #7a6070; }
-.empty .ei { font-size: 32px; display: block; margin-bottom: 8px; opacity: 0.4; }
-
-canvas { display: none; position: fixed; left: -9999px; top: 0; }
+@media(max-width:360px){.r2{grid-template-columns:1fr}}
 </style>
-
 </head>
 <body>
+<div id="app">
 
-<!-- PAGE 1: NOVO RECIBO -->
+<!-- NOVO RECIBO -->
 
-<div class="page on" id="pgNovo">
-  <div class="hero">
-    <h1>Novo <span>Recibo</span></h1>
-    <p>Preencha os dados e gere o recibo</p>
-    <div class="hbar"></div>
-  </div>
-  <div class="card">
-
-```
-<div class="slbl">👤 Responsável</div>
-<div class="fi">
-  <label class="fl">Nome completo <span class="rq">*</span></label>
-  <input type="text" id="iResp" placeholder="Ex: Ana Paula Silva">
-  <div class="err-msg" id="eResp">Informe o nome</div>
-</div>
-<div class="fi">
-  <label class="fl">CPF ou CNPJ <span class="rq">*</span></label>
-  <input type="text" id="iDoc" placeholder="000.000.000-00" maxlength="18" inputmode="numeric" oninput="maskDoc(this)">
-  <div class="err-msg" id="eDoc">Informe o CPF ou CNPJ</div>
-</div>
-
-<div class="slbl">🩰 Aluna(o)</div>
-<div class="fi">
-  <label class="fl">Nome da aluna(o) <span class="rq">*</span></label>
-  <input type="text" id="iAluna" placeholder="Ex: Sofia Silva">
-  <div class="err-msg" id="eAluna">Informe o nome</div>
-</div>
-<div class="fi">
-  <label class="fl">Modalidade(s) <span class="rq">*</span></label>
-  <div class="cklist">
-    <div class="ck-row"><label><input type="checkbox" class="mod" value="Ballet"> 🩰 Ballet</label></div>
-    <div class="ck-row"><label><input type="checkbox" class="mod" value="Jazz"> 🎷 Jazz</label></div>
-    <div class="ck-row"><label><input type="checkbox" class="mod" value="Contemporâneo"> 🌊 Contemporâneo</label></div>
-    <div class="ck-row"><label><input type="checkbox" class="mod" value="Sapateado"> 🥿 Sapateado</label></div>
-    <div class="ck-row"><label><input type="checkbox" class="mod" value="Street Dance"> 🎤 Street Dance</label></div>
-    <div class="ck-row"><label><input type="checkbox" class="mod" value="Dança Kids"> 🌈 Dança Kids</label></div>
-    <div class="ck-row"><label><input type="checkbox" class="mod" value="Dance Mix"> 🎵 Dance Mix</label></div>
-    <div class="ck-row"><label><input type="checkbox" class="mod" value="Heels"> 👠 Heels</label></div>
-    <div class="ck-row"><label><input type="checkbox" class="mod" value="Teatro"> 🎭 Teatro</label></div>
-    <div class="ck-row"><label><input type="checkbox" class="mod" value="Teatro Musical"> 🎬 Teatro Musical</label></div>
-    <div class="ck-row"><label><input type="checkbox" id="cbOutra" value="outra" onchange="toggleOutra()"> ✏️ Outra modalidade</label></div>
-  </div>
-  <div id="outraBox" style="display:none; margin-top:8px;">
-    <input type="text" id="iOutra" placeholder="Digite a modalidade">
-  </div>
-  <div class="err-msg" id="eMod">Selecione ao menos uma modalidade</div>
-</div>
-
-<div class="slbl">💰 Pagamento</div>
-<div class="r2" style="margin-bottom:10px;">
-  <div class="fi">
-    <label class="fl">Qtd. figurinos <span class="rq">*</span></label>
-    <input type="number" id="iQtd" value="1" min="1" inputmode="numeric" placeholder="1">
-    <div class="err-msg" id="eQtd">Informe a quantidade</div>
-  </div>
-  <div class="fi">
-    <label class="fl">Valor unitário R$</label>
-    <input type="number" id="iUnit" min="0" step="0.01" inputmode="decimal" placeholder="Ex: 495,00">
-  </div>
-</div>
-<div class="fi">
-  <label class="fl">Valor total R$ <span class="rq">*</span></label>
-  <input type="number" id="iTotal" min="0.01" step="0.01" inputmode="decimal" placeholder="Ex: 495,00">
-  <div class="err-msg" id="eTotal">Informe o valor total</div>
-</div>
-
-<div class="slbl">📎 Comprovantes</div>
-<div class="fi">
-  <label class="fl">Tipo de pagamento</label>
-  <select id="iPagTipo" onchange="mudarTipo()">
-    <option value="avista">À vista — 1 comprovante</option>
-    <option value="agendado">Com agendamentos — vários comprovantes</option>
-  </select>
-</div>
-<div id="compWrap">
-  <div class="comp-card" id="comp_1">
-    <div class="comp-title">📎 Comprovante — Pagamento à vista</div>
-    <input class="comp-desc-inp" type="text" id="desc_1" value="Comprovante — Pagamento à vista" placeholder="Descrição do comprovante">
-    <button type="button" class="upload-area" id="upbtn_1" onclick="document.getElementById('upfile_1').click()">
-      📎 Toque para selecionar o comprovante<br>
-      <small style="font-size:12px;opacity:0.7;">Foto do PIX ou comprovante bancário</small>
-    </button>
-    <input type="file" id="upfile_1" accept="image/*,application/pdf" style="display:none;" onchange="handleFile(this,1)">
-    <img id="upimg_1" class="file-preview">
-  </div>
-</div>
-<button type="button" class="btn-add-comp" id="btnAddComp" style="display:none;" onclick="addComp()">+ Adicionar outro comprovante</button>
-
-<button type="button" class="btn-main" onclick="gerarRecibo()">🧾 Gerar Recibo</button>
-```
-
-  </div>
-</div>
-
-<!-- PAGE 2: RECIBO GERADO -->
-
-<div class="page" id="pgRecibo">
-  <div class="hero">
-    <h1>Recibo <span>Gerado</span></h1>
-    <p>Envie para o responsável</p>
-    <div class="hbar"></div>
-  </div>
-  <div class="card">
-    <div class="rdoc">
-      <div class="rdoc-hdr">
-        <h4>Recibo de Pagamento</h4>
-        <p>Pagamento referente à compra coletiva de figurinos do espetáculo de 2026</p>
-        <div class="rbar"></div>
+<div class="pg on" id="pgNovo">
+  <div class="hero"><h1>Novo <em>Recibo</em></h1><p>Preencha os dados e gere o recibo</p><div class="hbar"></div></div>
+  <div class="panel">
+    <div class="slbl">👤 Responsável</div>
+    <div class="fi"><label class="fl">Nome completo <span class="rq">*</span></label><input class="inp" type="text" id="iResp" placeholder="Ex: Ana Paula Silva" autocomplete="name"><div class="em" id="eResp">Informe o nome</div></div>
+    <div class="fi"><label class="fl">CPF ou CNPJ <span class="rq">*</span></label><input class="inp" type="text" id="iDoc" placeholder="000.000.000-00" maxlength="18" inputmode="numeric"><div class="em" id="eDoc">Informe o CPF ou CNPJ</div></div>
+    <div class="slbl">🩰 Aluna(o)</div>
+    <div class="fi"><label class="fl">Nome da aluna(o) <span class="rq">*</span></label><input class="inp" type="text" id="iAluna" placeholder="Ex: Sofia Silva"><div class="em" id="eAluna">Informe o nome</div></div>
+    <div class="fi">
+      <label class="fl">Modalidade(s) <span class="rq">*</span></label>
+      <div class="cklist">
+        <div class="ck-row"><label><input type="checkbox" class="mod" value="Ballet"> 🩰 Ballet</label></div>
+        <div class="ck-row"><label><input type="checkbox" class="mod" value="Jazz"> 🎷 Jazz</label></div>
+        <div class="ck-row"><label><input type="checkbox" class="mod" value="Contemporâneo"> 🌊 Contemporâneo</label></div>
+        <div class="ck-row"><label><input type="checkbox" class="mod" value="Sapateado"> 🥿 Sapateado</label></div>
+        <div class="ck-row"><label><input type="checkbox" class="mod" value="Street Dance"> 🎤 Street Dance</label></div>
+        <div class="ck-row"><label><input type="checkbox" class="mod" value="Dança Kids"> 🌈 Dança Kids</label></div>
+        <div class="ck-row"><label><input type="checkbox" class="mod" value="Dance Mix"> 🎵 Dance Mix</label></div>
+        <div class="ck-row"><label><input type="checkbox" class="mod" value="Heels"> 👠 Heels</label></div>
+        <div class="ck-row"><label><input type="checkbox" class="mod" value="Teatro"> 🎭 Teatro</label></div>
+        <div class="ck-row"><label><input type="checkbox" class="mod" value="Teatro Musical"> 🎬 Teatro Musical</label></div>
+        <div class="ck-row"><label><input type="checkbox" id="cbOutra" value="outra"> ✏️ Outra modalidade</label></div>
       </div>
+      <div id="outraBox" style="display:none;margin-top:8px"><input class="inp" type="text" id="iOutra" placeholder="Digite a modalidade"></div>
+      <div class="em" id="eMod">Selecione ao menos uma modalidade</div>
+    </div>
+    <div class="slbl">💰 Pagamento</div>
+    <div class="r2">
+      <div class="fi"><label class="fl">Qtd. figurinos <span class="rq">*</span></label><input class="inp" type="number" id="iQtd" value="1" min="1" inputmode="numeric"><div class="em" id="eQtd">Informe</div></div>
+      <div class="fi"><label class="fl">Valor unitário R$</label><input class="inp" type="number" id="iUnit" min="0" step="0.01" inputmode="decimal" placeholder="Opcional"></div>
+    </div>
+    <div class="fi"><label class="fl">Valor total R$ <span class="rq">*</span></label><input class="inp" type="number" id="iTotal" min="0.01" step="0.01" inputmode="decimal" placeholder="Ex: 495,00"><div class="em" id="eTotal">Informe o valor total</div></div>
+    <div class="slbl">📎 Comprovantes</div>
+    <div class="fi"><label class="fl">Tipo de pagamento</label>
+      <select class="inp" id="iPagTipo">
+        <option value="avista">À vista — 1 comprovante</option>
+        <option value="agendado">Com agendamentos — vários comprovantes</option>
+      </select>
+    </div>
+    <div id="compWrap">
+      <div class="comp-card" id="comp_1">
+        <div class="comp-title">📎 Comprovante de pagamento</div>
+        <input class="comp-desc-inp" type="text" id="desc_1" value="Comprovante — Pagamento à vista" placeholder="Descrição">
+        <button type="button" class="upload-btn" id="upbtn_1">📎 Toque para selecionar o comprovante<br><small style="font-size:11px;opacity:.7">Foto do PIX ou comprovante bancário</small></button>
+        <input type="file" id="upfile_1" accept="image/*,application/pdf" style="display:none">
+        <img id="upimg_1" class="preview-img">
+      </div>
+    </div>
+    <button type="button" class="btn-add-comp" id="btnAdd" style="display:none">+ Adicionar outro comprovante</button>
+    <button type="button" class="btn-main" id="btnGerar">🧾 Gerar Recibo</button>
+  </div>
+</div>
+
+<!-- RECIBO GERADO -->
+
+<div class="pg" id="pgRecibo">
+  <div class="hero"><h1>Recibo <em>Gerado</em></h1><p>Envie para o responsável</p><div class="hbar"></div></div>
+  <div class="panel">
+    <div class="rdoc">
+      <div class="rdoc-hdr"><h4>Recibo de Pagamento</h4><p>Pagamento referente à compra coletiva de figurinos do espetáculo de 2026</p><div class="rbar"></div></div>
       <div class="rdoc-body">
         <div class="rdoc-lbl"><span>Figurinos 2026</span></div>
         <div class="rdoc-txt" id="rTxt"></div>
-        <div class="rdoc-sig">
-          <div class="rsig-city" id="rCity"></div>
-          <div class="rsig-line"></div>
-          <div class="rsig-name">Maria Claudia S. Donegá</div>
-          <div class="rsig-cpf">CPF 026.426.519-08</div>
-        </div>
+        <div class="rdoc-sig"><div class="rsig-city" id="rCity"></div><div class="rsig-line"></div><div class="rsig-name">Maria Claudia S. Donegá</div><div class="rsig-cpf">CPF 026.426.519-08</div></div>
       </div>
     </div>
-    <button type="button" class="btn-blue" onclick="gerarImagem()">📸 Salvar como imagem<br><small style="font-weight:400;font-size:12px">Abre compartilhamento para o WhatsApp</small></button>
-    <button type="button" class="btn-purple" onclick="gerarPDF()">📄 Gerar PDF completo<br><small style="font-weight:400;font-size:12px">Recibo + comprovantes em um arquivo</small></button>
-    <button type="button" class="btn-green" onclick="copiarTexto()">📋 Copiar texto<br><small style="font-weight:400;font-size:12px">Cole diretamente no WhatsApp</small></button>
-    <button type="button" class="btn-ok" onclick="salvarPasta()">✅ Salvar na pasta de recibos</button>
-    <button type="button" class="btn-gray" onclick="novoRecibo()">+ Novo recibo</button>
+    <button type="button" class="btn-blue" id="btnImg">📸 Salvar como imagem<small>Toque longo na imagem → Salvar → WhatsApp</small></button>
+    <button type="button" class="btn-green" id="btnPDF">📄 Ver PDF completo<small>Recibo + comprovante para salvar</small></button>
+    <button type="button" class="btn-green" id="btnCopy" style="background:#2a7a54">📋 Copiar texto<small>Cole diretamente no WhatsApp</small></button>
+    <button type="button" class="btn-ok" id="btnSalvar">✅ Salvar na pasta de recibos</button>
+    <button type="button" class="btn-gray" id="btnNovo">+ Novo recibo</button>
   </div>
 </div>
 
-<!-- PAGE 3: PASTA -->
+<!-- PASTA -->
 
-<div class="page" id="pgPasta">
-  <div class="hero">
-    <h1>📁 Pasta de <span>Recibos</span></h1>
-    <p>Todos os recibos gerados</p>
-    <div class="hbar"></div>
-  </div>
-  <div class="card">
+<div class="pg" id="pgPasta">
+  <div class="hero"><h1>📁 Pasta de <em>Recibos</em></h1><p>Todos os recibos gerados</p><div class="hbar"></div></div>
+  <div class="panel">
     <div class="stats">
       <div class="stat"><span>Total</span><strong id="stT">0</strong></div>
-      <div class="stat"><span>Arrecadado</span><strong class="gold" id="stV">R$ 0</strong></div>
+      <div class="stat"><span>Arrecadado</span><strong class="gd" id="stV">R$0</strong></div>
       <div class="stat"><span>Figurinos</span><strong id="stF">0</strong></div>
     </div>
     <div id="lista"></div>
   </div>
 </div>
 
-<!-- BOTTOM NAV -->
+</div>
+
+<!-- PDF OVERLAY (na mesma página, sem popup) -->
+
+<div class="pdf-ov" id="pdfOv">
+  <div class="pdf-ov-inner">
+    <div class="pdf-top-bar">
+      <button type="button" class="pdf-back" id="pdfBack">← Voltar</button>
+      <button type="button" class="pdf-save" id="pdfSave">🖨️ Salvar como PDF</button>
+    </div>
+    <div id="pdfContent"></div>
+    <div class="pdf-hint">
+      <strong>📱 Como salvar como PDF no iPhone:</strong><br>
+      Toque em <strong>🖨️ Salvar como PDF</strong> acima → na tela de impressão, <strong>belisque a prévia</strong> com dois dedos para ampliar → toque em <strong>↑ compartilhar</strong> → <strong>Salvar em Arquivos</strong>
+    </div>
+  </div>
+</div>
 
 <nav class="bnav">
-  <button class="bni on" id="bn0" onclick="irPara('pgNovo',0)"><span class="ico">📝</span>Novo Recibo</button>
-  <button class="bni" id="bn1" onclick="irPara('pgPasta',1)"><span class="ico">📁</span>Pasta</button>
+  <button class="bni on" id="bn0"><span class="ico">📝</span>Novo Recibo</button>
+  <button class="bni" id="bn1"><span class="ico">📁</span>Pasta</button>
 </nav>
-
-<div class="loading" id="loading"><div class="spin"></div><p>Aguarde...</p></div>
-<div class="toast" id="toast"></div>
+<div class="lov" id="lov"><div class="spin"></div><p>Gerando...</p></div>
+<div class="toast" id="tst"></div>
 <canvas id="cv"></canvas>
 
 <script>
-// ═══════════════════════════════════
-// DADOS GLOBAIS
-// ═══════════════════════════════════
-var CHAVE = 'fig2026v4';
+var CHAVE = 'fig2026v5';
 var recibos = [];
 var recAtual = null;
-var comprovantes = [];
-var numComps = 0;
+var comps = [{desc:'Comprovante — Pagamento à vista', img:null}];
+var numComps = 1;
 
-try {
-  var salvo = localStorage.getItem(CHAVE);
-  if (salvo) recibos = JSON.parse(salvo);
-} catch(e) { recibos = []; }
+try { recibos = JSON.parse(localStorage.getItem(CHAVE)||'[]'); } catch(e) { recibos=[]; }
+function salvarDB() { try { localStorage.setItem(CHAVE, JSON.stringify(recibos)); } catch(e){} }
 
-function salvarDados() {
-  try { localStorage.setItem(CHAVE, JSON.stringify(recibos)); } catch(e) {}
+// ── UTILS ──
+function fmt(v) { return parseFloat(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function toast(m) { var t=document.getElementById('tst'); t.textContent=m; t.classList.add('on'); setTimeout(function(){t.classList.remove('on');},3500); }
+function setErr(iId,mId,show) {
+  var i=document.getElementById(iId), m=document.getElementById(mId);
+  if(show){if(i)i.style.borderColor='#c00';if(m)m.classList.add('on');}
+  else{if(i)i.style.borderColor='';if(m)m.classList.remove('on');}
 }
 
-// ═══════════════════════════════════
-// NAVEGAÇÃO
-// ═══════════════════════════════════
-function irPara(paginaId, btnIdx) {
-  document.getElementById('pgNovo').classList.remove('on');
-  document.getElementById('pgRecibo').classList.remove('on');
-  document.getElementById('pgPasta').classList.remove('on');
-  document.getElementById('bn0').classList.remove('on');
-  document.getElementById('bn1').classList.remove('on');
-
-  document.getElementById(paginaId).classList.add('on');
-  document.getElementById('bn' + btnIdx).classList.add('on');
-
-  window.scrollTo(0, 0);
-
-  if (paginaId === 'pgPasta') renderPasta();
+// ── NAV ──
+function irPara(pgId, btnIdx) {
+  ['pgNovo','pgRecibo','pgPasta'].forEach(function(id){document.getElementById(id).classList.remove('on');});
+  ['bn0','bn1'].forEach(function(id){document.getElementById(id).classList.remove('on');});
+  document.getElementById(pgId).classList.add('on');
+  if(btnIdx>=0) document.getElementById('bn'+btnIdx).classList.add('on');
+  document.getElementById(pgId).scrollTop=0;
+  if(pgId==='pgPasta') renderPasta();
 }
+document.getElementById('bn0').onclick = function(){irPara('pgNovo',0);};
+document.getElementById('bn1').onclick = function(){irPara('pgPasta',1);};
 
-// ═══════════════════════════════════
-// UTILITÁRIOS
-// ═══════════════════════════════════
-function fmt(v) {
-  return parseFloat(v || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-
-function showToast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('on');
-  setTimeout(function() { t.classList.remove('on'); }, 3500);
-}
-
-function mostrarErro(inputId, msgId, mostrar) {
-  var inp = document.getElementById(inputId);
-  var msg = document.getElementById(msgId);
-  if (mostrar) {
-    if (inp) inp.style.borderColor = '#c00';
-    if (msg) msg.style.display = 'block';
+// ── CPF/CNPJ MASK ──
+document.getElementById('iDoc').addEventListener('input', function(){
+  var v=this.value.replace(/\D/g,'');
+  if(v.length<=11){
+    if(v.length>9)v=v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/,'$1.$2.$3-$4');
+    else if(v.length>6)v=v.replace(/(\d{3})(\d{3})(\d{1,3})/,'$1.$2.$3');
+    else if(v.length>3)v=v.replace(/(\d{3})(\d{1,3})/,'$1.$2');
   } else {
-    if (inp) inp.style.borderColor = '';
-    if (msg) msg.style.display = 'none';
+    v=v.slice(0,14);
+    if(v.length>12)v=v.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{1,2})/,'$1.$2.$3/$4-$5');
+    else if(v.length>8)v=v.replace(/(\d{2})(\d{3})(\d{3})(\d{1,4})/,'$1.$2.$3/$4');
+    else if(v.length>5)v=v.replace(/(\d{2})(\d{3})(\d{1,3})/,'$1.$2.$3');
+    else if(v.length>2)v=v.replace(/(\d{2})(\d{1,3})/,'$1.$2');
   }
-}
+  this.value=v;
+});
 
-// ═══════════════════════════════════
-// MÁSCARA CPF/CNPJ
-// ═══════════════════════════════════
-function maskDoc(el) {
-  var v = el.value.replace(/\D/g, '');
-  if (v.length <= 11) {
-    if (v.length > 9) v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
-    else if (v.length > 6) v = v.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
-    else if (v.length > 3) v = v.replace(/(\d{3})(\d{1,3})/, '$1.$2');
-  } else {
-    v = v.slice(0, 14);
-    if (v.length > 12) v = v.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{1,2})/, '$1.$2.$3/$4-$5');
-    else if (v.length > 8) v = v.replace(/(\d{2})(\d{3})(\d{3})(\d{1,4})/, '$1.$2.$3/$4');
-    else if (v.length > 5) v = v.replace(/(\d{2})(\d{3})(\d{1,3})/, '$1.$2.$3');
-    else if (v.length > 2) v = v.replace(/(\d{2})(\d{1,3})/, '$1.$2');
+// ── MODALIDADES ──
+document.getElementById('cbOutra').onchange = function(){
+  document.getElementById('outraBox').style.display = this.checked?'block':'none';
+  if(!this.checked) document.getElementById('iOutra').value='';
+};
+function getMods(){
+  var v=[];
+  document.querySelectorAll('.mod').forEach(function(cb){if(cb.checked)v.push(cb.value);});
+  if(document.getElementById('cbOutra').checked){
+    var o=(document.getElementById('iOutra').value||'').trim();
+    if(o)v.push(o);
   }
-  el.value = v;
+  return v;
 }
 
-// ═══════════════════════════════════
-// MODALIDADES
-// ═══════════════════════════════════
-function toggleOutra() {
-  var cb = document.getElementById('cbOutra');
-  var box = document.getElementById('outraBox');
-  box.style.display = cb.checked ? 'block' : 'none';
-  if (!cb.checked) document.getElementById('iOutra').value = '';
+// ── COMPROVANTES ──
+document.getElementById('iPagTipo').onchange = function(){
+  var tipo=this.value;
+  document.getElementById('btnAdd').style.display = tipo==='agendado'?'block':'none';
+};
+
+// Bind first comp
+bindComp(1);
+
+function bindComp(n){
+  var btn=document.getElementById('upbtn_'+n);
+  var file=document.getElementById('upfile_'+n);
+  if(!btn||!file) return;
+  btn.onclick=function(){file.click();};
+  file.onchange=function(e){
+    var f=e.target.files[0]; if(!f)return;
+    btn.innerHTML='✅ '+f.name;
+    btn.className='upload-btn ok';
+    if(comps[n-1]) comps[n-1].desc=(document.getElementById('desc_'+n).value)||comps[n-1].desc;
+    if(f.type.indexOf('image/')===0){
+      var r=new FileReader();
+      r.onload=function(ev){
+        if(comps[n-1])comps[n-1].img=ev.target.result;
+        var img=document.getElementById('upimg_'+n);
+        img.src=ev.target.result; img.style.display='block';
+      };
+      r.readAsDataURL(f);
+    } else { if(comps[n-1])comps[n-1].img='pdf'; }
+  };
+  var desc=document.getElementById('desc_'+n);
+  if(desc) desc.oninput=function(){if(comps[n-1])comps[n-1].desc=this.value;};
 }
 
-function getModalidades() {
-  var lista = [];
-  var cbs = document.querySelectorAll('.mod');
-  for (var i = 0; i < cbs.length; i++) {
-    if (cbs[i].checked) lista.push(cbs[i].value);
-  }
-  var cbOutra = document.getElementById('cbOutra');
-  if (cbOutra && cbOutra.checked) {
-    var outra = document.getElementById('iOutra').value.trim();
-    if (outra) lista.push(outra);
-  }
-  return lista;
-}
-
-// ═══════════════════════════════════
-// COMPROVANTES
-// ═══════════════════════════════════
-function mudarTipo() {
-  try {
-  var tipo = document.getElementById('iPagTipo').value;
-  comprovantes = [];
-  numComps = 0;
-  document.getElementById('compWrap').innerHTML = '';
-  document.getElementById('btnAddComp').style.display = tipo === 'agendado' ? 'block' : 'none';
-  addComp(tipo === 'avista' ? 'Comprovante — Pagamento à vista' : 'Comprovante 1 — Entrada');
-  } catch(e) { alert('Erro tipo: ' + e.message); }
-}
-
-function addComp(label) {
+document.getElementById('btnAdd').onclick = function(){
   numComps++;
-  var n = numComps;
-  if (!label) label = 'Comprovante ' + n + ' — Agendamento';
-  comprovantes.push({ desc: label, img: null });
-
-  var wrap = document.getElementById('compWrap');
-  var div = document.createElement('div');
-  div.className = 'comp-card';
-  div.id = 'comp_' + n;
-
-  var removeBtn = n > 1 ? '<button type="button" onclick="removeComp(' + n + ')" style="float:right;background:#fce8f0;border:none;border-radius:20px;padding:3px 10px;font-size:11px;color:#c0185a;font-weight:700;cursor:pointer;">✕ Remover</button>' : '';
-
-  div.innerHTML =
-    '<div class="comp-title" style="overflow:hidden;">' + removeBtn + '📎 ' + label + '</div>' +
-    '<input class="comp-desc-inp" type="text" id="desc_' + n + '" value="' + label + '" placeholder="Descrição do comprovante" onchange="syncDesc(' + n + ')">' +
-    '<button type="button" class="upload-area" id="upbtn_' + n + '" onclick="document.getElementById(\'upfile_' + n + '\').click()">' +
-      '📎 Toque para selecionar o comprovante<br><small>Foto do PIX ou comprovante bancário</small>' +
-    '</button>' +
-    '<input type="file" id="upfile_' + n + '" accept="image/*,application/pdf" style="display:none;" onchange="handleFile(this,' + n + ')">' +
-    '<img id="upimg_' + n + '" class="file-preview">';
-
+  var n=numComps;
+  comps.push({desc:'Comprovante '+n+' — Agendamento',img:null});
+  var wrap=document.getElementById('compWrap');
+  var div=document.createElement('div');
+  div.className='comp-card'; div.id='comp_'+n;
+  div.innerHTML=
+    '<div class="comp-title">📎 Comprovante '+n+
+    '<button type="button" onclick="remComp('+n+')" style="background:var(--pks);border:none;border-radius:20px;padding:3px 10px;font-size:11px;color:var(--pk);font-weight:700;cursor:pointer;">✕ Remover</button></div>'+
+    '<input class="comp-desc-inp" type="text" id="desc_'+n+'" value="Comprovante '+n+' — Agendamento" placeholder="Descrição">'+
+    '<button type="button" class="upload-btn" id="upbtn_'+n+'">📎 Toque para selecionar<br><small style="font-size:11px;opacity:.7">Foto do PIX ou comprovante</small></button>'+
+    '<input type="file" id="upfile_'+n+'" accept="image/*,application/pdf" style="display:none">'+
+    '<img id="upimg_'+n+'" class="preview-img">';
   wrap.appendChild(div);
+  bindComp(n);
+};
+
+function remComp(n){
+  var el=document.getElementById('comp_'+n); if(el)el.remove();
+  comps.splice(n-1,1);
 }
 
-function syncDesc(n) {
-  var el = document.getElementById('desc_' + n);
-  if (el && comprovantes[n - 1]) comprovantes[n - 1].desc = el.value;
-}
-
-function removeComp(n) {
-  var el = document.getElementById('comp_' + n);
-  if (el) el.remove();
-  comprovantes.splice(n - 1, 1);
-}
-
-function handleFile(input, n) {
-  var f = input.files[0];
-  if (!f) return;
-  var btn = document.getElementById('upbtn_' + n);
-  btn.textContent = '✅ ' + f.name;
-  btn.className = 'upload-area ok';
-  if (comprovantes[n - 1]) comprovantes[n - 1].desc = document.getElementById('desc_' + n).value || comprovantes[n - 1].desc;
-
-  if (f.type.indexOf('image/') === 0) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      if (comprovantes[n - 1]) comprovantes[n - 1].img = e.target.result;
-      var img = document.getElementById('upimg_' + n);
-      img.src = e.target.result;
-      img.style.display = 'block';
-    };
-    reader.readAsDataURL(f);
-  } else {
-    if (comprovantes[n - 1]) comprovantes[n - 1].img = 'pdf';
-  }
-}
-
-// ═══════════════════════════════════
-// VALIDAÇÃO
-// ═══════════════════════════════════
-function validar() {
-  var ok = true;
-  var resp = (document.getElementById('iResp').value || '').trim();
-  var doc = (document.getElementById('iDoc').value || '').trim();
-  var aluna = (document.getElementById('iAluna').value || '').trim();
-  var mods = getModalidades();
-  var qtd = parseInt(document.getElementById('iQtd').value) || 0;
-  var total = parseFloat(document.getElementById('iTotal').value) || 0;
-
-  mostrarErro('iResp', 'eResp', !resp); if (!resp) ok = false;
-  mostrarErro('iDoc', 'eDoc', !doc); if (!doc) ok = false;
-  mostrarErro('iAluna', 'eAluna', !aluna); if (!aluna) ok = false;
-
-  var eMod = document.getElementById('eMod');
-  if (!mods.length) { eMod.style.display = 'block'; ok = false; } else eMod.style.display = 'none';
-
-  mostrarErro('iQtd', 'eQtd', qtd < 1); if (qtd < 1) ok = false;
-  mostrarErro('iTotal', 'eTotal', total <= 0); if (total <= 0) ok = false;
-
+// ── VALIDAR ──
+function validar(){
+  var ok=true;
+  var resp=(document.getElementById('iResp').value||'').trim();
+  var doc=(document.getElementById('iDoc').value||'').trim();
+  var aluna=(document.getElementById('iAluna').value||'').trim();
+  var mods=getMods();
+  var qtd=parseInt(document.getElementById('iQtd').value)||0;
+  var total=parseFloat(document.getElementById('iTotal').value)||0;
+  setErr('iResp','eResp',!resp); if(!resp)ok=false;
+  setErr('iDoc','eDoc',!doc); if(!doc)ok=false;
+  setErr('iAluna','eAluna',!aluna); if(!aluna)ok=false;
+  var em=document.getElementById('eMod');
+  if(!mods.length){em.classList.add('on');ok=false;}else em.classList.remove('on');
+  setErr('iQtd','eQtd',qtd<1); if(qtd<1)ok=false;
+  setErr('iTotal','eTotal',total<=0); if(total<=0)ok=false;
   return ok;
 }
 
-// ═══════════════════════════════════
-// GERAR RECIBO
-// ═══════════════════════════════════
-function gerarRecibo() {
-  if (!validar()) {
-    showToast('⚠️ Preencha todos os campos obrigatórios');
-    return;
-  }
+// ── GERAR RECIBO ──
+document.getElementById('btnGerar').onclick = function(){
+  if(!validar()){toast('⚠️ Preencha todos os campos obrigatórios');return;}
+  // sync comp descs
+  for(var i=0;i<comps.length;i++){var d=document.getElementById('desc_'+(i+1));if(d)comps[i].desc=d.value;}
+  var resp=(document.getElementById('iResp').value||'').trim();
+  var doc=(document.getElementById('iDoc').value||'').trim();
+  var aluna=(document.getElementById('iAluna').value||'').trim();
+  var mods=getMods();
+  var qtd=parseInt(document.getElementById('iQtd').value);
+  var unit=parseFloat(document.getElementById('iUnit').value)||0;
+  var total=parseFloat(document.getElementById('iTotal').value);
+  var docLbl=doc.replace(/\D/g,'').length>11?'CNPJ':'CPF';
+  var multi=mods.length>1;
+  var fPl=qtd>1?'figurinos':'figurino';
+  var tPl=multi?'turmas':'turma';
+  var pPl=multi?'participarão':'participará';
+  var hoje=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+  var texto='Recebi de '+resp+', '+docLbl+': '+doc+', responsável pela(s) aluna(s) '+aluna+', o valor de R$ '+fmt(total)+', referente à compra de '+qtd+' '+fPl+' das '+tPl+' de '+mods.join(', ')+', que '+pPl+' do elenco do espetáculo de encerramento do ano de 2026: Edna Moda e o Outro Lado da História em: E AGORA… QUEM É O VILÃO?';
+  var plain='RECIBO DE PAGAMENTO\nPagamento referente à compra coletiva de figurinos do espetáculo de 2026\n\n'+texto+'\n\nBarueri, '+hoje+'\n\nMaria Claudia S. Donegá\nCPF 026.426.519-08';
+  recAtual={id:Date.now(),resp:resp,doc:doc,aluna:aluna,modal:mods.join(', '),qtd:qtd,unit:unit,total:total,texto:texto,plain:plain,dataHoje:hoje,comps:JSON.parse(JSON.stringify(comps)),ts:new Date().toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}),status:'gerado'};
+  document.getElementById('rTxt').innerHTML=texto.replace(resp,'<strong>'+resp+'</strong>').replace(aluna,'<strong>'+aluna+'</strong>').replace('R$ '+fmt(total),'<strong>R$ '+fmt(total)+'</strong>').replace(mods.join(', '),'<strong>'+mods.join(', ')+'</strong>');
+  document.getElementById('rCity').textContent='Barueri, '+hoje;
+  irPara('pgRecibo',-1);
+};
 
-  // Sincronizar descrições dos comprovantes
-  for (var i = 0; i < comprovantes.length; i++) {
-    var descEl = document.getElementById('desc_' + (i + 1));
-    if (descEl) comprovantes[i].desc = descEl.value || comprovantes[i].desc;
-  }
+// ── COPIAR TEXTO ──
+document.getElementById('btnCopy').onclick = function(){
+  if(!recAtual){toast('Gere um recibo primeiro');return;}
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(recAtual.plain).then(function(){toast('📋 Copiado! Cole no WhatsApp.');}).catch(function(){fbCopy(recAtual.plain);});
+  } else { fbCopy(recAtual.plain); }
+};
+function fbCopy(t){var ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;opacity:0;top:0;left:0;width:1px;height:1px';document.body.appendChild(ta);ta.focus();ta.select();try{document.execCommand('copy');toast('📋 Copiado! Cole no WhatsApp.');}catch(e){toast('Não foi possível copiar.');}document.body.removeChild(ta);}
 
-  var resp = document.getElementById('iResp').value.trim();
-  var doc = document.getElementById('iDoc').value.trim();
-  var aluna = document.getElementById('iAluna').value.trim();
-  var mods = getModalidades();
-  var qtd = parseInt(document.getElementById('iQtd').value);
-  var unit = parseFloat(document.getElementById('iUnit').value) || 0;
-  var total = parseFloat(document.getElementById('iTotal').value);
+// ── GERAR IMAGEM (canvas → nova aba) ──
+document.getElementById('btnImg').onclick = function(){
+  if(!recAtual){toast('Gere um recibo primeiro');return;}
+  var lov=document.getElementById('lov');
+  lov.classList.add('on');
+  // Abre janela ANTES do timeout — Safari exige que window.open seja em resposta direta ao clique
+  var win=window.open('','_blank');
+  setTimeout(function(){
+    try{
+      var r=recAtual;
+      var cv=document.getElementById('cv');
+      var ctx=cv.getContext('2d');
+      var W=900,pad=50;
+      cv.width=W;cv.height=100;
+      ctx.font='27px Georgia,serif';
+      var linhas=wrapTxt(ctx,r.texto,W-pad*2-20);
+      var H=260+linhas.length*48+220;
+      cv.width=W;cv.height=H;
+      // fundo
+      ctx.fillStyle='#f5eff4';ctx.fillRect(0,0,W,H);
+      rrect(ctx,18,18,W-36,H-36,18,'#fff');
+      // header
+      rrect(ctx,18,18,W-36,160,18,'#1c1018');
+      ctx.fillStyle='#1c1018';ctx.fillRect(18,140,W-36,40);
+      ctx.textAlign='center';
+      ctx.fillStyle='#fff';ctx.font='bold 36px Georgia,serif';
+      ctx.fillText('RECIBO DE PAGAMENTO',W/2,82);
+      ctx.font='italic 18px Georgia,serif';ctx.fillStyle='rgba(255,255,255,0.45)';
+      ctx.fillText('Pagamento referente à compra coletiva de figurinos — 2026',W/2,115);
+      var g=ctx.createLinearGradient(60,152,W-60,152);
+      g.addColorStop(0,'#c49a2a');g.addColorStop(.5,'#f5d97a');g.addColorStop(1,'#c49a2a');
+      ctx.fillStyle=g;ctx.fillRect(60,150,W-120,3);
+      // label
+      var lw=195,lh=32,lx=(W-lw)/2,ly=182;
+      ctx.beginPath();if(ctx.roundRect)ctx.roundRect(lx,ly,lw,lh,16);else ctx.rect(lx,ly,lw,lh);
+      ctx.fillStyle='#fce8f0';ctx.fill();ctx.strokeStyle='#f0c0d4';ctx.lineWidth=1.5;ctx.stroke();
+      ctx.fillStyle='#8a0f3f';ctx.font='bold 15px sans-serif';ctx.fillText('FIGURINOS 2026',W/2,ly+21);
+      // body
+      ctx.textAlign='left';ctx.fillStyle='#1c1018';ctx.font='27px Georgia,serif';
+      var y=238;
+      for(var i=0;i<linhas.length;i++){ctx.fillText(linhas[i],pad,y);y+=48;}
+      // separator
+      y+=16;ctx.strokeStyle='#ddd';ctx.lineWidth=1;ctx.setLineDash([8,6]);
+      ctx.beginPath();ctx.moveTo(pad,y);ctx.lineTo(W-pad,y);ctx.stroke();ctx.setLineDash([]);
+      // assinatura
+      y+=30;ctx.textAlign='right';ctx.font='23px Georgia,serif';ctx.fillStyle='#7a6070';
+      ctx.fillText('Barueri, '+r.dataHoje,W-pad,y);
+      y+=20;ctx.strokeStyle='#c0185a';ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(W-pad-215,y);ctx.lineTo(W-pad,y);ctx.stroke();
+      y+=28;ctx.font='bold 28px Georgia,serif';ctx.fillStyle='#1c1018';
+      ctx.fillText('Maria Claudia S. Donegá',W-pad,y);
+      y+=24;ctx.font='21px Georgia,serif';ctx.fillStyle='#7a6070';
+      ctx.fillText('CPF 026.426.519-08',W-pad,y);
+      // footer
+      ctx.fillStyle='#1c1018';ctx.fillRect(18,H-54,W-36,36);
+      ctx.fillStyle='rgba(255,255,255,0.3)';ctx.font='16px sans-serif';ctx.textAlign='center';
+      ctx.fillText('Figurinos 2026 · E AGORA… QUEM É O VILÃO? · Barueri, SP',W/2,H-30);
+      lov.classList.remove('on');
+      var url=cv.toDataURL('image/png');
+      var nome='Recibo_'+r.aluna.replace(/\s+/g,'_')+'_2026.png';
+      if(win&&!win.closed){
+        win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recibo '+r.aluna+'</title><style>body{margin:0;background:#1c1018;display:flex;flex-direction:column;align-items:center;padding:16px;gap:12px;font-family:sans-serif}.tip{background:#fff;border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.6;max-width:500px;width:100%}.tip b{color:#c0185a}img{max-width:100%;border-radius:12px}a{display:block;width:100%;max-width:500px;padding:14px;border-radius:12px;background:#c0185a;color:#fff;text-align:center;font-weight:bold;font-size:15px;text-decoration:none}</style></head><body><div class="tip">📱 <b>iPhone:</b> Toque e segure na imagem → <b>"Salvar imagem"</b> → rolo da câmera → envie pelo WhatsApp</div><img src="'+url+'" alt="Recibo"><a href="'+url+'" download="'+nome+'">⬇️ Baixar imagem</a></body></html>');
 
-  var docLabel = doc.replace(/\D/g, '').length > 11 ? 'CNPJ' : 'CPF';
-  var multi = mods.length > 1;
-  var figPl = qtd > 1 ? 'figurinos' : 'figurino';
-  var tPl = multi ? 'turmas' : 'turma';
-  var pPl = multi ? 'participarão' : 'participará';
-  var hoje = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
-
-  var texto =
-    'Recebi de ' + resp + ', ' + docLabel + ': ' + doc + ', ' +
-    'responsável pela(s) aluna(s) ' + aluna + ', ' +
-    'o valor de R$ ' + fmt(total) + ', ' +
-    'referente à compra de ' + qtd + ' ' + figPl + ' ' +
-    'das ' + tPl + ' de ' + mods.join(', ') + ', ' +
-    'que ' + pPl + ' do elenco do espetáculo de encerramento do ano de 2026: ' +
-    'Edna Moda e o Outro Lado da História em: E AGORA… QUEM É O VILÃO?';
-
-  var textoCopia =
-    'RECIBO DE PAGAMENTO\n' +
-    'Pagamento referente à compra coletiva de figurinos do espetáculo de 2026\n\n' +
-    texto + '\n\n' +
-    'Barueri, ' + hoje + '\n\n' +
-    'Maria Claudia S. Donegá\n' +
-    'CPF 026.426.519-08';
-
-  recAtual = {
-    id: Date.now(),
-    resp: resp, doc: doc, aluna: aluna,
-    modal: mods.join(', '),
-    qtd: qtd, unit: unit, total: total,
-    texto: texto, textoCopia: textoCopia,
-    dataHoje: hoje,
-    comps: JSON.parse(JSON.stringify(comprovantes)),
-    ts: new Date().toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
-    status: 'gerado'
-  };
-
-  document.getElementById('rTxt').innerHTML = texto
-    .replace(resp, '<strong>' + resp + '</strong>')
-    .replace(aluna, '<strong>' + aluna + '</strong>')
-    .replace('R$ ' + fmt(total), '<strong>R$ ' + fmt(total) + '</strong>')
-    .replace(mods.join(', '), '<strong>' + mods.join(', ') + '</strong>');
-
-  document.getElementById('rCity').textContent = 'Barueri, ' + hoje;
-
-  document.getElementById('pgNovo').classList.remove('on');
-  document.getElementById('pgRecibo').classList.add('on');
-  document.getElementById('bn0').classList.remove('on');
-  document.getElementById('bn1').classList.remove('on');
-  window.scrollTo(0, 0);
-}
-
-// ═══════════════════════════════════
-// COPIAR TEXTO
-// ═══════════════════════════════════
-function copiarTexto() {
-  if (!recAtual) { showToast('Gere um recibo primeiro'); return; }
-  var txt = recAtual.textoCopia;
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(txt).then(function() {
-      showToast('📋 Copiado! Cole no WhatsApp.');
-    }).catch(function() { copiarFallback(txt); });
+```
+    win.document.close();
   } else {
-    copiarFallback(txt);
+    var a=document.createElement('a');a.href=url;a.download=nome;a.click();
+    toast('📸 Imagem salva!');
   }
+}catch(e){
+  lov.classList.remove('on');
+  if(win&&!win.closed)win.close();
+  toast('Erro: '+e.message);
 }
+```
 
-function copiarFallback(txt) {
-  var ta = document.createElement('textarea');
-  ta.value = txt;
-  ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;width:1px;height:1px;';
-  document.body.appendChild(ta);
-  ta.focus(); ta.select();
-  try { document.execCommand('copy'); showToast('📋 Copiado! Cole no WhatsApp.'); }
-  catch(e) { showToast('Não foi possível copiar.'); }
-  document.body.removeChild(ta);
+},200);
+};
+
+// ── PDF OVERLAY (sem popup, sem document.write) ──
+document.getElementById(‘btnPDF’).onclick = function(){
+if(!recAtual){toast(‘Gere um recibo primeiro’);return;}
+var r=recAtual;
+var compsHtml=’’;
+for(var i=0;i<r.comps.length;i++){
+var c=r.comps[i];
+compsHtml+=’<div style="margin-top:18px;border-top:1px dashed #ddd;padding-top:14px;"><p style="font-size:11px;font-weight:700;color:#7a6070;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">📎 ‘+(c.desc||‘Comprovante ‘+(i+1))+’</p>’+
+(c.img&&c.img!==‘pdf’?’<img src="'+c.img+'" style="max-width:100%;border-radius:8px;border:1px solid #ddd;">’:
+c.img===‘pdf’?’<p style="color:#7a6070;font-size:13px;">Arquivo PDF</p>’:’’)+
+‘</div>’;
 }
+var html=
+‘<div style="font-family:Georgia,serif;">’+
+‘<div style="background:linear-gradient(135deg,#1c1018,#3a0e28);padding:20px;text-align:center;border-radius:12px 12px 0 0;">’+
+‘<h1 style="color:#fff;font-size:18px;letter-spacing:2px;text-transform:uppercase;font-family:Georgia,serif;">Recibo de Pagamento</h1>’+
+‘<div style="height:2px;background:linear-gradient(90deg,#c49a2a,#f5d97a,#c49a2a);margin-top:10px;"></div>’+
+‘<p style="color:rgba(255,255,255,.4);font-size:11px;margin-top:6px;font-style:italic;font-family:sans-serif;">Pagamento referente à compra coletiva de figurinos do espetáculo de 2026</p></div>’+
+‘<div style="padding:20px;border:1px solid #f0c0d4;border-top:none;border-radius:0 0 12px 12px;">’+
+‘<div style="text-align:center;margin-bottom:13px;"><span style="display:inline-block;background:#fce8f0;color:#8a0f3f;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 12px;border-radius:20px;border:1px solid #f0c0d4;font-family:sans-serif;">Figurinos 2026</span></div>’+
+‘<p style="font-size:15px;line-height:2;color:#1c1018;text-align:justify;margin-bottom:17px;">’+r.texto+’</p>’+
+‘<div style="border-top:1px dashed #ddd;padding-top:12px;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">’+
+‘<p style="font-size:12px;color:#7a6070;margin-bottom:5px;font-family:sans-serif;">Barueri, ‘+r.dataHoje+’</p>’+
+‘<div style="width:155px;height:1px;background:#c0185a;margin-bottom:5px;"></div>’+
+‘<p style="font-size:15px;font-weight:700;">Maria Claudia S. Donegá</p>’+
+‘<p style="font-size:11px;color:#7a6070;font-family:sans-serif;">CPF 026.426.519-08</p></div>’+
+compsHtml+’</div>’+
+‘<div style="background:#1c1018;padding:10px;text-align:center;margin-top:14px;border-radius:8px;">’+
+‘<p style="color:rgba(255,255,255,.3);font-size:10px;font-family:sans-serif;">Figurinos 2026 — E AGORA… QUEM É O VILÃO? · ‘+r.ts+’</p></div></div>’;
+document.getElementById(‘pdfContent’).innerHTML=html;
+document.getElementById(‘pdfOv’).classList.add(‘on’);
+};
 
-// ═══════════════════════════════════
-// GERAR IMAGEM
-// ═══════════════════════════════════
-function gerarImagem() {
-  if (!recAtual) { showToast('Gere um recibo primeiro'); return; }
-  var r = recAtual;
-  document.getElementById('loading').classList.add('on');
+document.getElementById(‘pdfBack’).onclick=function(){document.getElementById(‘pdfOv’).classList.remove(‘on’);};
+document.getElementById(‘pdfSave’).onclick=function(){window.print();};
 
-  setTimeout(function() {
-    try {
-      var cv = document.getElementById('cv');
-      var ctx = cv.getContext('2d');
-      var W = 900, pad = 50;
-      cv.width = W; cv.height = 100;
-      ctx.font = '27px Georgia, serif';
-      var linhas = quebrarTexto(ctx, r.texto, W - pad * 2 - 20);
-      var H = 260 + linhas.length * 48 + 220;
-      cv.width = W; cv.height = H;
-
-      ctx.fillStyle = '#f5eff4'; ctx.fillRect(0, 0, W, H);
-      retArredondado(ctx, 18, 18, W-36, H-36, 18, '#fff');
-      retArredondado(ctx, 18, 18, W-36, 160, 18, '#1c1018');
-      ctx.fillStyle = '#1c1018'; ctx.fillRect(18, 140, W-36, 40);
-
-      ctx.textAlign = 'center';
-      ctx.fillStyle = '#fff';
-      ctx.font = 'bold 36px Georgia, serif';
-      ctx.fillText('RECIBO DE PAGAMENTO', W/2, 82);
-      ctx.font = 'italic 18px Georgia, serif';
-      ctx.fillStyle = 'rgba(255,255,255,0.45)';
-      ctx.fillText('Pagamento referente à compra coletiva de figurinos — 2026', W/2, 115);
-
-      var g = ctx.createLinearGradient(60, 152, W-60, 152);
-      g.addColorStop(0, '#c49a2a'); g.addColorStop(0.5, '#f5d97a'); g.addColorStop(1, '#c49a2a');
-      ctx.fillStyle = g; ctx.fillRect(60, 150, W-120, 3);
-
-      var lw = 195, lh = 32, lx = (W-lw)/2, ly = 182;
-      ctx.beginPath(); ctx.roundRect(lx, ly, lw, lh, 16);
-      ctx.fillStyle = '#fce8f0'; ctx.fill();
-      ctx.strokeStyle = '#f0c0d4'; ctx.lineWidth = 1.5; ctx.stroke();
-      ctx.fillStyle = '#8a0f3f'; ctx.font = 'bold 15px sans-serif';
-      ctx.fillText('FIGURINOS 2026', W/2, ly+21);
-
-      ctx.textAlign = 'left'; ctx.fillStyle = '#1c1018'; ctx.font = '27px Georgia, serif';
-      var y = 238;
-      for (var i = 0; i < linhas.length; i++) { ctx.fillText(linhas[i], pad, y); y += 48; }
-
-      y += 16; ctx.strokeStyle = '#ddd'; ctx.lineWidth = 1; ctx.setLineDash([8, 6]);
-      ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(W-pad, y); ctx.stroke(); ctx.setLineDash([]);
-
-      y += 30; ctx.textAlign = 'right';
-      ctx.font = '23px Georgia, serif'; ctx.fillStyle = '#7a6070';
-      ctx.fillText('Barueri, ' + r.dataHoje, W-pad, y);
-      y += 20; ctx.strokeStyle = '#c0185a'; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(W-pad-215, y); ctx.lineTo(W-pad, y); ctx.stroke();
-      y += 28; ctx.font = 'bold 28px Georgia, serif'; ctx.fillStyle = '#1c1018';
-      ctx.fillText('Maria Claudia S. Donegá', W-pad, y);
-      y += 24; ctx.font = '21px Georgia, serif'; ctx.fillStyle = '#7a6070';
-      ctx.fillText('CPF 026.426.519-08', W-pad, y);
-
-      ctx.fillStyle = '#1c1018'; ctx.fillRect(18, H-54, W-36, 36);
-      ctx.fillStyle = 'rgba(255,255,255,0.3)'; ctx.font = '16px sans-serif'; ctx.textAlign = 'center';
-      ctx.fillText('Figurinos 2026 · E AGORA… QUEM É O VILÃO? · Barueri, SP', W/2, H-30);
-
-      document.getElementById('loading').classList.remove('on');
-
-      var nome = 'Recibo_' + r.aluna.replace(/\s+/g, '_') + '_2026.png';
-      var url = cv.toDataURL('image/png');
-
-      // Usar <a download> — funciona sem pop-up no Safari
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = nome;
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      showToast('📸 Imagem salva! Abra o app Arquivos ou Fotos.');
-
-    } catch(e) {
-      document.getElementById('loading').classList.remove('on');
-      showToast('Erro ao gerar imagem: ' + e.message);
-    }
-  }, 200);
-}
-
-
-function gerarPDF() {
-  if (!recAtual) { showToast('Gere um recibo primeiro'); return; }
-  var r = recAtual;
-
-  var compsHtml = '';
-  for (var i = 0; i < r.comps.length; i++) {
-    var c = r.comps[i];
-    compsHtml += '<div style="margin-top:20px;border-top:1px dashed #ddd;padding-top:16px;">' +
-      '<p style="font-size:11px;font-weight:700;color:#7a6070;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">📎 ' + (c.desc || 'Comprovante ' + (i+1)) + '</p>' +
-      (c.img && c.img !== 'pdf' ? '<img src="' + c.img + '" style="max-width:100%;border-radius:8px;border:1px solid #ddd;">' :
-       c.img === 'pdf' ? '<p style="color:#7a6070;font-size:13px;">PDF anexado</p>' : '') +
-      '</div>';
-  }
-
-  var html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recibo - ' + r.aluna + '</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Georgia,serif;background:#f5eff4;padding:20px 14px}.doc{background:#fff;max-width:540px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.1)}.hdr{background:linear-gradient(135deg,#1c1018,#3a0e28);padding:20px 22px;text-align:center}.hdr h1{color:#fff;font-size:19px;letter-spacing:2px;text-transform:uppercase}.bar{height:2px;background:linear-gradient(90deg,#c49a2a,#f5d97a,#c49a2a);margin-top:10px}.hdr p{color:rgba(255,255,255,.4);font-size:11px;margin-top:6px;font-style:italic}.body{padding:22px}.lbl{text-align:center;margin-bottom:13px}.lbl span{display:inline-block;background:#fce8f0;color:#8a0f3f;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 12px;border-radius:20px;border:1px solid #f0c0d4}.txt{font-size:15px;line-height:2;color:#1c1018;text-align:justify;margin-bottom:17px}.sig{border-top:1px dashed #ddd;padding-top:13px;display:flex;flex-direction:column;align-items:flex-end;gap:3px}.sig .dt{font-size:12px;color:#7a6070;margin-bottom:5px}.sig .ln{width:155px;height:1px;background:#c0185a;margin-bottom:5px}.sig .nm{font-size:15px;font-weight:700}.sig .cp{font-size:11px;color:#7a6070}.foot{background:#1c1018;padding:10px;text-align:center}.foot p{color:rgba(255,255,255,.3);font-size:10px}.btn-print{width:100%;padding:14px;border-radius:12px;border:none;background:#c0185a;color:#fff;font-family:sans-serif;font-weight:bold;font-size:15px;cursor:pointer;margin-top:13px;display:block}.hint{font-size:12px;color:#7a6070;text-align:center;margin-top:8px;line-height:1.5;padding:0 8px}@media print{body{background:#fff;padding:0}.doc{box-shadow:none;border-radius:0;max-width:100%}.nop{display:none}}</style></head><body><div class="doc"><div class="hdr"><h1>Recibo de Pagamento</h1><div class="bar"></div><p>Pagamento referente à compra coletiva de figurinos do espetáculo de 2026</p></div><div class="body"><div class="lbl"><span>Figurinos 2026</span></div><div class="txt">' + r.texto + '</div><div class="sig"><div class="dt">Barueri, ' + r.dataHoje + '</div><div class="ln"></div><div class="nm">Maria Claudia S. Donegá</div><div class="cp">CPF 026.426.519-08</div></div>' + compsHtml + '</div><div class="foot"><p>Figurinos 2026 — E AGORA… QUEM É O VILÃO? · ' + r.ts + '</p></div></div><div class="nop" style="max-width:540px;margin:13px auto;"><button class="btn-print" onclick="window.print()">🖨️ Imprimir / Salvar como PDF</button><p class="hint">iPhone: toque em 🖨️ → Imprimir → belisque a prévia para ampliar → toque em ↑ → "Salvar em PDF"</p></div></body></html>';
-
-// Criar blob e fazer download direto
-try {
-var blob = new Blob([html], {type: ‘text/html;charset=utf-8’});
-var url = URL.createObjectURL(blob);
-var a = document.createElement(‘a’);
-a.href = url;
-a.download = ‘Recibo_’ + r.aluna.replace(/\s+/g,’_’) + ‘_2026.html’;
-a.style.display = ‘none’;
-document.body.appendChild(a);
-a.click();
-setTimeout(function(){ URL.revokeObjectURL(url); document.body.removeChild(a); }, 1000);
-showToast(‘📄 Arquivo salvo! Abra nos Arquivos do iPhone.’);
-} catch(e) {
-// Fallback: abrir inline
-document.open(‘text/html’, ‘replace’);
-document.write(html);
-document.close();
-}
-}
-
-// ═══════════════════════════════════
-// SALVAR NA PASTA
-// ═══════════════════════════════════
-function salvarPasta() {
-if (!recAtual) return;
-recAtual.status = ‘enviado’;
-recAtual.tsEnviado = new Date().toLocaleString(‘pt-BR’, { day: ‘2-digit’, month: ‘2-digit’, year: ‘numeric’, hour: ‘2-digit’, minute: ‘2-digit’ });
+// ── SALVAR NA PASTA ──
+document.getElementById(‘btnSalvar’).onclick=function(){
+if(!recAtual)return;
+recAtual.status=‘enviado’;
+recAtual.tsEnviado=new Date().toLocaleString(‘pt-BR’,{day:‘2-digit’,month:‘2-digit’,year:‘numeric’,hour:‘2-digit’,minute:‘2-digit’});
 recibos.unshift(JSON.parse(JSON.stringify(recAtual)));
-salvarDados();
-recAtual = null;
-showToast(‘✅ Salvo na pasta de recibos!’);
-irPara(‘pgPasta’, 1);
+salvarDB(); recAtual=null;
+toast(‘✅ Salvo na pasta!’);
+irPara(‘pgPasta’,1);
+};
+
+// ── NOVO RECIBO ──
+document.getElementById(‘btnNovo’).onclick=function(){
+recAtual=null;
+[‘iResp’,‘iDoc’,‘iAluna’,‘iOutra’,‘iUnit’,‘iTotal’].forEach(function(id){var el=document.getElementById(id);if(el)el.value=’’;});
+document.getElementById(‘iQtd’).value=‘1’;
+document.getElementById(‘outraBox’).style.display=‘none’;
+document.querySelectorAll(’.mod,#cbOutra’).forEach(function(cb){cb.checked=false;});
+document.getElementById(‘iPagTipo’).value=‘avista’;
+document.getElementById(‘btnAdd’).style.display=‘none’;
+// reset comps
+comps=[{desc:‘Comprovante — Pagamento à vista’,img:null}]; numComps=1;
+document.getElementById(‘compWrap’).innerHTML=
+‘<div class="comp-card" id="comp_1">’+
+‘<div class="comp-title">📎 Comprovante de pagamento</div>’+
+‘<input class="comp-desc-inp" type="text" id="desc_1" value="Comprovante — Pagamento à vista" placeholder="Descrição">’+
+‘<button type="button" class="upload-btn" id="upbtn_1">📎 Toque para selecionar o comprovante<br><small style="font-size:11px;opacity:.7">Foto do PIX ou comprovante bancário</small></button>’+
+‘<input type="file" id="upfile_1" accept="image/*,application/pdf" style="display:none">’+
+‘<img id="upimg_1" class="preview-img">’+
+‘</div>’;
+bindComp(1);
+document.querySelectorAll(’.em.on’).forEach(function(e){e.classList.remove(‘on’);});
+irPara(‘pgNovo’,0);
+};
+
+// ── PASTA ──
+function renderPasta(){
+var l=document.getElementById(‘lista’);
+document.getElementById(‘stT’).textContent=recibos.length;
+document.getElementById(‘stV’).textContent=‘R$ ‘+fmt(recibos.reduce(function(a,r){return a+r.total;},0));
+document.getElementById(‘stF’).textContent=recibos.reduce(function(a,r){return a+(r.qtd||1);},0);
+if(!recibos.length){l.innerHTML=’<div class="empty"><span class="ei">📂</span><p>Nenhum recibo salvo ainda.</p></div>’;return;}
+l.innerHTML=recibos.map(function(r){
+var tags=r.modal.split(’,’).map(function(m){return ‘<span class="tag">’+m.trim()+’</span>’;}).join(’’);
+var av=(r.comps&&r.comps[0]&&r.comps[0].img&&r.comps[0].img!==‘pdf’)?’<img src="'+r.comps[0].img+'" alt="">’:‘🎭’;
+return ‘<div class="pcard" id="pc_'+r.id+'">’+
+‘<div class="pchd" onclick="tog('+r.id+')">’+
+‘<div class="pav">’+av+’</div>’+
+‘<div class="pin"><strong>’+r.aluna+’</strong><div class="meta">👤 ‘+r.resp+’ · ‘+r.ts+’</div><div class="ptags">’+tags+’<span class="tag tag-ok">✅</span></div></div>’+
+‘<div class="pval"><strong>R$ ‘+fmt(r.total)+’</strong><span>’+r.qtd+’ fig.</span></div>’+
+‘</div>’+
+‘<div class="pbody" id="pb_'+r.id+'">’+
+‘<div class="rdoc"><div class="rdoc-hdr"><h4>Recibo de Pagamento</h4><p>Pagamento referente à compra coletiva de figurinos do espetáculo de 2026</p><div class="rbar"></div></div>’+
+‘<div class="rdoc-body"><div class="rdoc-lbl"><span>Figurinos 2026</span></div><div class="rdoc-txt">’+r.texto+’</div>’+
+‘<div class="rdoc-sig"><div class="rsig-city">Barueri, ‘+r.dataHoje+’</div><div class="rsig-line"></div><div class="rsig-name">Maria Claudia S. Donegá</div><div class="rsig-cpf">CPF 026.426.519-08</div></div></div></div>’+
+‘<button type="button" class="btn-green" style="margin-top:10px" onclick="copiarPasta('+r.id+')">📋 Copiar texto<small>Cole no WhatsApp</small></button>’+
+‘<button type="button" class="btn-del" onclick="excluir('+r.id+')">🗑️ Excluir</button>’+
+‘</div></div>’;
+}).join(’’);
 }
+function tog(id){var b=document.getElementById(‘pb_’+id);if(b)b.classList.toggle(‘on’);}
+function copiarPasta(id){var r=recibos.find(function(x){return x.id===id;});if(r){fbCopy(r.plain||r.texto);}}
+function excluir(id){if(!confirm(‘Excluir?’))return;recibos=recibos.filter(function(r){return r.id!==id;});salvarDB();renderPasta();toast(‘🗑️ Removido’);}
 
-// ═══════════════════════════════════
-// NOVO RECIBO
-// ═══════════════════════════════════
-function novoRecibo() {
-recAtual = null;
-var ids = [‘iResp’, ‘iDoc’, ‘iAluna’, ‘iOutra’, ‘iUnit’, ‘iTotal’];
-for (var i = 0; i < ids.length; i++) {
-var el = document.getElementById(ids[i]);
-if (el) el.value = ‘’;
+// ── CANVAS UTILS ──
+function wrapTxt(ctx,txt,maxW){
+var words=txt.split(’ ‘),lines=[],cur=’’;
+for(var i=0;i<words.length;i++){
+var t=cur?cur+’ ’+words[i]:words[i];
+if(ctx.measureText(t).width>maxW&&cur){lines.push(cur);cur=words[i];}else cur=t;
 }
-document.getElementById(‘iQtd’).value = ‘1’;
-document.getElementById(‘outraBox’).style.display = ‘none’;
-var cbs = document.querySelectorAll(’.mod, #cbOutra’);
-for (var j = 0; j < cbs.length; j++) cbs[j].checked = false;
-document.getElementById(‘iPagTipo’).value = ‘avista’;
-mudarTipo();
-
-// Limpar erros
-var errMsgs = document.querySelectorAll(’.err-msg’);
-for (var k = 0; k < errMsgs.length; k++) errMsgs[k].style.display = ‘none’;
-
-irPara(‘pgNovo’, 0);
+if(cur)lines.push(cur);
+return lines;
 }
-
-// ═══════════════════════════════════
-// PASTA DE RECIBOS
-// ═══════════════════════════════════
-function renderPasta() {
-var lista = document.getElementById(‘lista’);
-document.getElementById(‘stT’).textContent = recibos.length;
-document.getElementById(‘stV’).textContent = ’R$ ’ + fmt(recibos.reduce(function(a, r) { return a + r.total; }, 0));
-document.getElementById(‘stF’).textContent = recibos.reduce(function(a, r) { return a + (r.qtd || 1); }, 0);
-
-if (!recibos.length) {
-lista.innerHTML = ‘<div class="empty"><span class="ei">📂</span><p>Nenhum recibo salvo ainda.</p></div>’;
-return;
+function rrect(ctx,x,y,w,h,r,fill){
+ctx.beginPath();
+if(ctx.roundRect){ctx.roundRect(x,y,w,h,r);}
+else{ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();}
+if(fill){ctx.fillStyle=fill;ctx.fill();}
 }
-
-var html = ‘’;
-for (var i = 0; i < recibos.length; i++) {
-var r = recibos[i];
-var mods = r.modal.split(’,’);
-var tags = ‘’;
-for (var j = 0; j < mods.length; j++) {
-tags += ‘<span class="tag">’ + mods[j].trim() + ’</span> ’;
-}
-tags += ‘<span class="tag tag-ok">✅ Salvo</span>’;
-
-```
-var av = (r.comps && r.comps[0] && r.comps[0].img && r.comps[0].img !== 'pdf')
-  ? '<img src="' + r.comps[0].img + '" alt="">'
-  : '🎭';
-
-html +=
-  '<div class="pcard" id="pc_' + r.id + '">' +
-  '<div class="pcard-hd" onclick="toggleCard(' + r.id + ')">' +
-    '<div class="pcard-av">' + av + '</div>' +
-    '<div class="pcard-info">' +
-      '<strong>' + r.aluna + '</strong>' +
-      '<div class="meta">👤 ' + r.resp + ' · ' + r.ts + '</div>' +
-      '<div class="pcard-tags">' + tags + '</div>' +
-    '</div>' +
-    '<div class="pcard-val"><strong>R$ ' + fmt(r.total) + '</strong><span>' + r.qtd + ' fig.</span></div>' +
-  '</div>' +
-  '<div class="pcard-body" id="pb_' + r.id + '">' +
-    (r.tsEnviado ? '<div style="background:#e6f5ee;border:1.5px solid #90d4b0;border-radius:9px;padding:9px 12px;font-size:12px;color:#1a7a4a;font-weight:600;margin-bottom:11px;">✅ Salvo em ' + r.tsEnviado + '</div>' : '') +
-    '<div class="rdoc">' +
-      '<div class="rdoc-hdr"><h4>Recibo de Pagamento</h4><p>Pagamento referente à compra coletiva de figurinos do espetáculo de 2026</p><div class="rbar"></div></div>' +
-      '<div class="rdoc-body">' +
-        '<div class="rdoc-lbl"><span>Figurinos 2026</span></div>' +
-        '<div class="rdoc-txt">' + r.texto + '</div>' +
-        '<div class="rdoc-sig">' +
-          '<div class="rsig-city">Barueri, ' + r.dataHoje + '</div>' +
-          '<div class="rsig-line"></div>' +
-          '<div class="rsig-name">Maria Claudia S. Donegá</div>' +
-          '<div class="rsig-cpf">CPF 026.426.519-08</div>' +
-        '</div>' +
-      '</div>' +
-    '</div>' +
-    '<button type="button" class="btn-green" onclick="copiarDaPasta(' + r.id + ')">📋 Copiar texto</button>' +
-    '<button type="button" class="btn-del" onclick="excluir(' + r.id + ')">🗑️ Excluir este recibo</button>' +
-  '</div>' +
-  '</div>';
-```
-
-}
-lista.innerHTML = html;
-}
-
-function toggleCard(id) {
-var el = document.getElementById(‘pb_’ + id);
-if (el) el.classList.toggle(‘on’);
-}
-
-function copiarDaPasta(id) {
-var r = null;
-for (var i = 0; i < recibos.length; i++) {
-if (recibos[i].id === id) { r = recibos[i]; break; }
-}
-if (!r) return;
-copiarFallback(r.textoCopia || r.texto);
-showToast(‘📋 Copiado! Cole no WhatsApp.’);
-}
-
-function excluir(id) {
-if (!confirm(‘Excluir este recibo?’)) return;
-var novos = [];
-for (var i = 0; i < recibos.length; i++) {
-if (recibos[i].id !== id) novos.push(recibos[i]);
-}
-recibos = novos;
-salvarDados();
-renderPasta();
-showToast(‘🗑️ Recibo removido’);
-}
-
-// ═══════════════════════════════════
-// INICIALIZAÇÃO
-// ═══════════════════════════════════
-// Inicializar comprovantes array com o comp já no HTML
-comprovantes = [{desc: ‘Comprovante — Pagamento à vista’, img: null}];
-numComps = 1;
 </script>
 
 </body>
